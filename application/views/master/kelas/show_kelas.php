@@ -37,8 +37,7 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama</th>
-                    <th>Fungsi</th>
+                    <th>Nama Kelas</th>
                     <th>Kapasitas</th>
                     <th>Action</th>
                   </tr>
@@ -50,14 +49,13 @@
                   ?>
                     <tr>
                       <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$kelas->nama?></td>
-                      <td><?=$kelas->fungsi?></td>
+                      <td><?=$kelas->nama_kelas?></td>
                       <td><?=$kelas->kapasitas?></td>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('kelas/edit_data/' . $kelas->kode_kelas)?>" class="btn btn-warning btn-xs" style="color: white;">
+                        <a href="<?=site_url('kelas/edit_data/' . $kelas->id_kelas)?>" class="btn btn-warning btn-xs" style="color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?=site_url('kelas/delete_data/' . $kelas->kode_kelas)?>" class="btn btn-danger btn-xs">
+                        <a href="<?=site_url('kelas/delete_data/' . $kelas->id_kelas)?>" class="btn btn-danger btn-xs">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>

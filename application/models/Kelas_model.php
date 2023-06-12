@@ -7,7 +7,7 @@ class Kelas_model extends CI_Model {
 	}
 
   public function getById($id) {
-    $this->db->where('kode_kelas', $id);
+    $this->db->where('id_kelas', $id);
     return $this->db->get('kelas')->row();
   }
 
@@ -16,12 +16,12 @@ class Kelas_model extends CI_Model {
   }
 
   public function edit($id, $data) {
-    $this->db->where('kode_kelas', $id);
+    $this->db->where('id_kelas', $id);
     return $this->db->update('kelas', $data);
   }
 
   public function delete($id) {
-    $this->db->where('kode_kelas', $id);
+    $this->db->where('id_kelas', $id);
     return $this->db->delete('kelas');
   }
 }

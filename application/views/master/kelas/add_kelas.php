@@ -38,16 +38,12 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kelas/add_data')?>" method="post">
                     <div class="form-group">
-                      <label for="kode">Kode Kelas *</label>
-                      <input type="text" name="kode_kelas" id="kode" class="form-control" required autofocus>
+                      <label for="id">ID Kelas *</label>
+                      <input type="text" name="id_kelas" id="id" class="form-control" required autofocus>
                     </div>
                     <div class="form-group">
                       <label for="nama">Nama Kelas*</label>
                       <input type="text" name="nama_kelas" id="nama" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="fungsi">Fungsi Kelas*</label>
-                      <input type="text" name="fungsi_kelas" id="fungsi" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="kapasitas">Kapasitas *</label>

@@ -24,18 +24,13 @@ class Kelas extends CI_Controller {
 	public function add_data() {
 		$config = array(
       array(
-        'field' => 'kode_kelas', 
-        'label' => 'Kode Kelas', 
+        'field' => 'id_kelas', 
+        'label' => 'id Kelas', 
         'rules' => 'max_length[10]',
       ),
 			array(
         'field' => 'nama_kelas', 
         'label' => 'Nama Kelas', 
-        'rules' => 'max_length[50]',
-      ),
-      array(
-        'field' => 'fungsi_kelas', 
-        'label' => 'Fungsi Kelas', 
         'rules' => 'max_length[50]',
       ),
 			array(
@@ -48,9 +43,8 @@ class Kelas extends CI_Controller {
 	
 	 	if($this->form_validation->run()) {
 			$data = [
-        'kode_kelas' => $this->input->POST('kode_kelas'),
-				'nama' => $this->input->POST('nama_kelas'),
-				'fungsi' => $this->input->POST('fungsi_kelas'),
+        'id_kelas' => $this->input->POST('id_kelas'),
+				'nama_kelas' => $this->input->POST('nama_kelas'),
 				'kapasitas' => $this->input->POST('kapasitas'),
 			];
 			$this->kelas_model->add($data);
@@ -70,11 +64,6 @@ class Kelas extends CI_Controller {
         'label' => 'Nama Kelas', 
         'rules' => 'max_length[50]',
       ),
-      array(
-        'field' => 'fungsi_kelas', 
-        'label' => 'Fungsi Kelas', 
-        'rules' => 'max_length[50]',
-      ),
 			array(
         'field' => 'kapasitas', 
         'label' => 'Kapasitas', 
@@ -85,8 +74,7 @@ class Kelas extends CI_Controller {
 
 		if($this->form_validation->run()) {
 			$data = [
-				'nama' => $this->input->POST('nama_kelas'),
-				'fungsi' => $this->input->POST('fungsi_kelas'),
+				'nama_kelas' => $this->input->POST('nama_kelas'),
 				'kapasitas' => $this->input->POST('kapasitas'),
 			];
 			$this->kelas_model->edit($id, $data);

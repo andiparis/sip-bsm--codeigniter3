@@ -36,18 +36,14 @@
               <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                  <form action="<?=site_url('kelas/edit_data/' . $kelas->kode_kelas)?>" method="post">
+                  <form action="<?=site_url('kelas/edit_data/' . $kelas->id_kelas)?>" method="post">
                     <div class="form-group">
-                      <label for="kode">Kode Kelas *</label>
-                      <input type="text" name="kode_kelas" id="kode" value="<?=$kelas->kode_kelas?>" class="form-control" disabled>
+                      <label for="id">ID Kelas *</label>
+                      <input type="text" name="id_kelas" id="id" value="<?=$kelas->id_kelas?>" class="form-control" disabled>
                     </div>
                     <div class="form-group">
                       <label for="nama">Nama Kelas *</label>
-                      <input type="text" name="nama_kelas" id="nama" value="<?=$kelas->nama?>" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="fungsi">Fungsi Kelas *</label>
-                      <input type="text" name="fungsi_kelas" id="fungsi" value="<?=$kelas->fungsi?>" class="form-control" required>
+                      <input type="text" name="nama_kelas" id="nama" value="<?=$kelas->nama_kelas?>" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="kapasitas">Kapasitas *</label>
