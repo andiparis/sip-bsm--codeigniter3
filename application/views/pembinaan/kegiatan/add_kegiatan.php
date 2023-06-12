@@ -5,13 +5,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Kelola Kegiatan</b></h1>
+          <h1><b>Kelola Jadwal Kegiatan</b></h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
             <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
-            <li class="breadcrumb-item active">Kelola Kegiatan</li>
+            <li class="breadcrumb-item active">Kelola Jadwal Kegiatan</li>
           </ol>
         </div>
       </div>
@@ -25,7 +25,7 @@
         <div class="col-12">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><b>Add Kegiatan Pembinaan</b></h3>
+              <h3 class="card-title"><b>Add Jadwal Kegiatan Pembinaan</b></h3>
               <div class="float-sm-right">
                 <a href="<?=site_url('kegiatan')?>" class="btn btn-warning">
                   <b style="color: white"><i class="fas fa-undo"></i> Back</b>
@@ -39,8 +39,17 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kegiatan/add_data')?>" method="post">
                     <div class="form-group">
-                      <label for="kode">Kode Kegiatan *</label>
-                      <input type="text" name="kode_kegiatan" id="kode" class="form-control" required autofocus>
+                      <label for="id">ID Kegiatan *</label>
+                      <input type="text" name="id_kegiatan" id="id" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                      <label for="permohonan">Permohonan Workshop</label>
+                      <select name="id_permohonan" id="permohonan" class="custom-select">
+                        <option value=""> - Pilih - </option>
+                        <?php foreach($data_permohonan as $permohonan) { ?>
+                          <option value="<?=$permohonan->id_permohonan?>"><?=$permohonan->nama_kegiatan?></option>
+                        <?php } ?>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="nama">Nama Kegiatan *</label>
@@ -50,8 +59,54 @@
                       <label for="kategori">Kategori Kegiatan *</label>
                       <select name="kategori_kegiatan" id="kategori" class="custom-select" required>
                         <option value=""> - Pilih - </option>
-                        <option value="Pelatihan">Pelatihan</option>
-                        <option value="Magang">Magang</option>
+                        <option value="1">Magang</option>
+                        <option value="2">Pelatihan</option>
+                        <option value="3">Workshop</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="tglmulai">Tgl Mulai *</label>
+                      <div class="input-group date" id="tglmulai" data-target-input="nearest">
+                        <input type="text" name="tgl_mulai" class="form-control datetimepicker-input" data-target="#tglmulai" required/>
+                        <div class="input-group-append" data-target="#tglmulai" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="tglberakhir">Tgl Berakhir *</label>
+                      <div class="input-group date" id="tglberakhir" data-target-input="nearest">
+                        <input type="text" name="tgl_berakhir" class="form-control datetimepicker-input" data-target="#tglberakhir" required/>
+                        <div class="input-group-append" data-target="#tglberakhir" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="instruktur1">Instruktur 1 *</label>
+                      <select name="id_instruktur_1" id="instruktur1" class="custom-select" required>
+                        <option value=""> - Pilih - </option>
+                        <?php foreach($data_instruktur as $instruktur) { ?>
+                          <option value="<?=$instruktur->id_instruktur?>"><?=$instruktur->nama?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="instruktur2">Instruktur 2</label>
+                      <select name="id_instruktur_2" id="instruktur2" class="custom-select">
+                        <option value=""> - Pilih - </option>
+                        <?php foreach($data_instruktur as $instruktur) { ?>
+                          <option value="<?=$instruktur->id_instruktur?>"><?=$instruktur->nama?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="kelas">Kelas</label>
+                      <select name="id_kelas" id="kelas" class="custom-select">
+                        <option value=""> - Pilih - </option>
+                        <?php foreach($data_kelas as $kelas) { ?>
+                          <option value="<?=$kelas->id_kelas?>"><?=$kelas->nama_kelas?></option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">

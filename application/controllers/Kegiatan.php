@@ -15,6 +15,8 @@ class Kegiatan extends CI_Controller {
   
 	public function index() {
 		$data['data'] = $this->kegiatan_model->getAll();
+    $data['data_instruktur_2'] = $this->kegiatan_model->getInstruktur2();
+    $data['data_kelas'] = $this->kegiatan_model->getKelas();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 		$this->load->view('pembinaan/kegiatan/show_kegiatan', $data);
@@ -24,19 +26,14 @@ class Kegiatan extends CI_Controller {
 	public function add_data() {
 		$config = array(
       array(
-        'field' => 'kode_kegiatan', 
-        'label' => 'Kode Kegiatan', 
+        'field' => 'id_kegiatan', 
+        'label' => 'ID Kegiatan', 
         'rules' => 'max_length[10]',
       ),
 			array(
         'field' => 'nama_kegiatan', 
         'label' => 'Nama Kegiatan', 
         'rules' => 'max_length[50]',
-      ),
-      array(
-        'field' => 'kategori_kegiatan', 
-        'label' => 'Kategori Kegiatan', 
-        'rules' => 'max_length[25]',
       ),
 			array(
         'field' => 'keterangan', 
@@ -45,20 +42,41 @@ class Kegiatan extends CI_Controller {
       ),
 		);
 		$this->form_validation->set_rules($config);	
+
+    $idPermohonan = $this->input->post('id_permohonan');
+    $idInstruktur2 = $this->input->post('id_instruktur_2');
+    $idKelas = $this->input->post('id_kelas');
+    if($idPermohonan == '')
+      $idPermohonan = null;
+    
+    if($idInstruktur2 == '')
+      $idInstruktur2 = null;
+
+    if($idKelas == '')
+      $idKelas = null;
 	
 	 	if($this->form_validation->run()) {
 			$data = [
-        'kode_kegiatan' => $this->input->POST('kode_kegiatan'),
+        'id_kegiatan' => $this->input->POST('id_kegiatan'),
+				'id_permohonan' => $idPermohonan,
 				'nama_kegiatan' => $this->input->POST('nama_kegiatan'),
-				'kategori' => $this->input->POST('kategori_kegiatan'),
+        'kategori' => $this->input->POST('kategori_kegiatan'),
+        'tgl_mulai' => $this->input->POST('tgl_mulai'),
+        'tgl_berakhir' => $this->input->POST('tgl_berakhir'),
+        'id_instruktur_1' => $this->input->POST('id_instruktur_1'),
+        'id_instruktur_2' => $idInstruktur2,
+        'id_kelas' => $idKelas,
 				'keterangan' => $this->input->POST('keterangan'),
 			];
 			$this->kegiatan_model->add($data);
 			redirect('kegiatan');
 		} else {
+      $data['data_permohonan'] = $this->kegiatan_model->getPermohonan();
+      $data['data_instruktur'] = $this->kegiatan_model->getInstrukturName();
+      $data['data_kelas'] = $this->kegiatan_model->getKelasName();
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
-			$this->load->view('pembinaan/kegiatan/add_kegiatan');
+			$this->load->view('pembinaan/kegiatan/add_kegiatan', $data);
 			$this->load->view('templates/footer');
 		}
 	}
@@ -70,11 +88,6 @@ class Kegiatan extends CI_Controller {
         'label' => 'Nama Kegiatan', 
         'rules' => 'max_length[50]',
       ),
-      array(
-        'field' => 'kategori_kegiatan', 
-        'label' => 'Kategori Kegiatan', 
-        'rules' => 'max_length[25]',
-      ),
 			array(
         'field' => 'keterangan', 
         'label' => 'Keterangan', 
@@ -83,16 +96,37 @@ class Kegiatan extends CI_Controller {
 		);
 		$this->form_validation->set_rules($config);
 
+    $idPermohonan = $this->input->post('id_permohonan');
+    $idInstruktur2 = $this->input->post('id_instruktur_2');
+    $idKelas = $this->input->post('id_kelas');
+    if($idPermohonan == '')
+      $idPermohonan = null;
+    
+    if($idInstruktur2 == '')
+      $idInstruktur2 = null;
+
+    if($idKelas == '')
+      $idKelas = null;
+
 		if($this->form_validation->run()) {
 			$data = [
+				'id_permohonan' => $idPermohonan,
 				'nama_kegiatan' => $this->input->POST('nama_kegiatan'),
-				'kategori' => $this->input->POST('kategori_kegiatan'),
+        'kategori' => $this->input->POST('kategori_kegiatan'),
+        'tgl_mulai' => $this->input->POST('tgl_mulai'),
+        'tgl_berakhir' => $this->input->POST('tgl_berakhir'),
+        'id_instruktur_1' => $this->input->POST('id_instruktur_1'),
+        'id_instruktur_2' => $idInstruktur2,
+        'id_kelas' => $idKelas,
 				'keterangan' => $this->input->POST('keterangan'),
 			];
 			$this->kegiatan_model->edit($id, $data);
 			redirect('kegiatan');
 		} else {
 			$data['kegiatan'] = $this->kegiatan_model->getById($id);
+      $data['data_permohonan'] = $this->kegiatan_model->getPermohonan();
+      $data['data_instruktur'] = $this->kegiatan_model->getInstrukturName();
+      $data['data_kelas'] = $this->kegiatan_model->getKelasName();
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
 			$this->load->view('pembinaan/kegiatan/edit_kegiatan', $data);

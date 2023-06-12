@@ -50,7 +50,7 @@
               <a href="<?=site_url('kegiatan')?>" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' ? 'active' : null?>">
                 <i class="nav-icon far fa-circle"></i>
                 <p>
-                  Kelola Kegiatan
+                  Kelola Jadwal Kegiatan
                 </p>
               </a>
             </li>
