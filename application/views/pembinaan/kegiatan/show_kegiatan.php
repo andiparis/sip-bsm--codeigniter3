@@ -64,21 +64,23 @@
                       // Show instruktur name
                       $instruktur1 = $kegiatan->nama;
 
-                      if($kegiatan->id_instruktur_2 == null)
+                      if($kegiatan->id_instruktur_2 == null) {
                         $instruktur2 = '-';
-                      
-                      foreach($data_instruktur_2 as $instruktur) {
-                        if($kegiatan->id_instruktur_2 == $instruktur->id_instruktur)
-                          $instruktur2 = $instruktur->nama;
+                      } else {
+                        foreach($data_instruktur_2 as $instruktur) {
+                          if($kegiatan->id_instruktur_2 == $instruktur->id_instruktur)
+                            $instruktur2 = $instruktur->nama;
+                        }
                       }
                       
                       // Show kelas name
-                      if($kegiatan->id_kelas == null)
+                      if($kegiatan->id_kelas == null) {
                         $namaKelas = '-';
-
-                      foreach($data_kelas as $kelas) {
-                        if($kegiatan->id_kelas == $kelas->id_kelas)
-                          $namaKelas = $kelas->nama_kelas;
+                      } else {
+                        foreach($data_kelas as $kelas) {
+                          if($kegiatan->id_kelas == $kelas->id_kelas)
+                            $namaKelas = $kelas->nama_kelas;
+                        }
                       }
 
                       // Show keterangan value

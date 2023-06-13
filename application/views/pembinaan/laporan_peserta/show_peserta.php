@@ -39,7 +39,7 @@
                     <th>No. Telp</th>
                     <th>Alamat</th>
                     <th>Email</th>
-                    <th>Jenis Kegiatan</th>
+                    <th>Kegiatan</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -59,11 +59,11 @@
                         $email = $peserta->email;
                       
                       if($peserta->status == '1')
-                        $status = 'Selesai';
-                      else if($peserta == '0')
-                        $status = 'Telah dijadwalkan';
+                        $status = 'Disetujui';
+                      else if($peserta->status == '0')
+                        $status = 'Ditolak';
                       else
-                        $status = 'Belum dijadwalkan';
+                        $status = 'Menunggu';
                       
                       foreach($data_kegiatan as $kegiatan) {
                         if($peserta->id_peserta == $kegiatan->id_peserta)
@@ -81,7 +81,12 @@
                       <td><?=$jenis_kegiatan?></td>
                       <td><?=$status?></td>
                       <td class="text-center" width="150px">
-                        
+                        <a href="<?=site_url('peserta/setujui_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-success btn-xs">
+                          <b>Setujui</b>
+                        </a>
+                        <a href="<?=site_url('peserta/tolak_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
+                          <b>Tolak</b>
+                        </a>
                       </td>
                     </tr>
                   <?php 

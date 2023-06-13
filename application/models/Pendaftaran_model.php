@@ -35,7 +35,7 @@ class Pendaftaran_model extends CI_Model {
       $no = '0001';
     }
     return 'PP'.date('ym').$no;
-    }
+  }
 
   public function addPeserta($data) {
     return $this->db->insert('peserta', $data);
