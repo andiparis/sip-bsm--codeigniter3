@@ -1,6 +1,6 @@
 <?php
 
-class Peserta_model extends CI_Model {
+class Laporan_Peserta_model extends CI_Model {
 
   public function getAll() {
     return $this->db->get('peserta')->result();

@@ -81,10 +81,10 @@
                       <td><?=$jenis_kegiatan?></td>
                       <td><?=$status?></td>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('peserta/setujui_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-success btn-xs">
+                        <a href="<?=site_url('laporan_peserta/setujui_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-success btn-xs">
                           <b>Setujui</b>
                         </a>
-                        <a href="<?=site_url('peserta/tolak_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
+                        <a href="<?=site_url('laporan_peserta/tolak_pendaftaran/' . $kegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
                           <b>Tolak</b>
                         </a>
                       </td>

@@ -1,6 +1,6 @@
 <?php
 
-class Peserta extends CI_Controller {
+class Laporan_Peserta extends CI_Controller {
 
   function __construct() {
 		parent::__construct();
