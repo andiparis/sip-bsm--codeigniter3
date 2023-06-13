@@ -9,7 +9,10 @@ class Pendaftaran extends CI_Controller {
   
 	public function index() {
     $data['data'] = $this->pendaftaran_model->getKegiatan();
+    // $data['id_peserta'] = $this->pendaftaran_model->makeIdPeserta();
+    $this->load->view('templates/header_user');
 		$this->load->view('pembinaan/pendaftaran/pendaftaran', $data);
+    $this->load->view('templates/footer_user');
 	}
 
 	public function add_data() {
@@ -40,24 +43,30 @@ class Pendaftaran extends CI_Controller {
         'rules' => 'max_length[50]',
       ),
 		);
-		$this->form_validation->set_rules($config);	
+		$this->form_validation->set_rules($config);
+
+    $idPeserta = $this->pendaftaran_model->makeIdPeserta();
+    $email = $this->input->post('email');
+    if($email == '')
+      $email = null;
 	
 	 	if($this->form_validation->run()) {
 			$dataPeserta = [
-        'id_peserta' => $this->input->POST('id_peserta'),
+        'id_peserta' => $idPeserta,
         'nama' => $this->input->POST('nama'),
 				'jk' => $this->input->POST('jenis_kelamin'),
 				'telp' => $this->input->POST('telp'),
 				'alamat' => $this->input->POST('alamat'),
-        'email' => $this->input->POST('email'),
+        'email' => $email,
         'tgl_daftar' => date('Y/m/d'),
 			];
 			$this->pendaftaran_model->addPeserta($dataPeserta);
-      $dataPresensi = [
-        'id_peserta' => $this->input->POST('id_peserta'),
-        'kode_kegiatan' => $this->input->POST('kegiatan'),
+      $dataPesertaPembinaan = [
+        'id_peserta_pembinaan' => $this->pendaftaran_model->makeIdPesertaPembinaan(),
+        'id_peserta' => $idPeserta,
+        'id_kegiatan' => $this->input->POST('kegiatan'),
       ];
-      $this->pendaftaran_model->addPresensi($dataPresensi);
+      $this->pendaftaran_model->addPesertaPembinaan($dataPesertaPembinaan);
 			redirect('pendaftaran');
 		}
   }
