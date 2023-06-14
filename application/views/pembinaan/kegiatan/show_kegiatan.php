@@ -42,7 +42,8 @@
                     <th>Nama Kegiatan</th>
                     <th>Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
-                    <th>Peserta</th>
+                    <th>Kuota Peserta</th>
+                    <th>Menunggu Konfirmasi</th>
                     <!-- <th>Instruktur 1</th> -->
                     <!-- <th>Instruktur 2</th> -->
                     <!-- <th>Kelas</th> -->
@@ -89,6 +90,17 @@
                       //   $keterangan = '-';
                       // else
                       //   $keterangan = $kegiatan->keterangan;
+                      $acceptedParticipant = 0;
+                      $waitingToConfirmation = 0;
+                      foreach($detailActivityData as $detailActivity) {
+                        $quota = $detailActivity->kuota;
+                        $participantStatus = $detailActivity->status;
+                        if($participantStatus == '1') {
+                          $acceptedParticipant++;
+                        } else if($participantStatus == null) {
+                          $waitingToConfirmation++;
+                        }
+                      }
                   ?>
                     <tr>
                       <td style="width: 5%;"><?=$no++?>.</td>
@@ -96,12 +108,13 @@
                       <td><?=$kegiatan->nama_kegiatan?></td>
                       <td><?=$kegiatan->tgl_mulai?></td>
                       <td><?=$kegiatan->tgl_berakhir?></td>
+                      <td><?=$acceptedParticipant . ' / ' . $quota?></td>
+                      <td><?=$waitingToConfirmation?></td>
                       <!-- <td><?=$instruktur1?></td> -->
                       <!-- <td><?=$instruktur2?></td> -->
                       <!-- <td><?=$namaKelas?></td> -->
                       <!-- <td><?=$keterangan?></td> -->
-                      <td></td>
-                      <td class="text-center" width="100px">
+                      <td class="text-center" width="150px">
                         <a href="<?=site_url('kegiatan/detail_data/' . $kegiatan->id_kegiatan)?>" class="btn btn-secondary btn-xs">
                           <b><i class="fas fa-info"></i> Detail</b>
                         </a>
