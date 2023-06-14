@@ -67,7 +67,7 @@
                         );
                       }
                       $activityDetailMap[$idKegiatan]['duplicateCount']++;
-                      if($activityDetail->status == null) {
+                      if($activityDetail->status == '0') {
                         $activityDetailMap[$idKegiatan]['waitingParticipant']++;
                       } else if($activityDetail->status == '1') {
                         $activityDetailMap[$idKegiatan]['acceptedParticipant']++;

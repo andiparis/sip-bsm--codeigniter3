@@ -3,11 +3,17 @@
 class Pendaftaran_model extends CI_Model {
 
   public function getKegiatan() {
-    $this->db->select('*');
-    $this->db->from('pembinaan');
-    $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
-    $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
-    return $this->db->get()->result();
+    $sql = "SELECT * FROM `peserta_pembinaan` 
+            RIGHT JOIN `pembinaan` 
+            ON `pembinaan`.`id_kegiatan` = `peserta_pembinaan`.`id_kegiatan` 
+            LEFT JOIN `peserta` 
+            ON `peserta_pembinaan`.`id_peserta` = `peserta`.`id_peserta`;";
+    $query = $this->db->query($sql);
+    // $this->db->select('*');
+    // $this->db->from('pembinaan');
+    // $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
+    // $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
+    return $query->result();
 	}
 
   public function makeIdPeserta() {

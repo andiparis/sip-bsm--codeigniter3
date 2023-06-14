@@ -68,13 +68,15 @@
                           }
                           if($activityDetail->status == '1') {
                             $activityDetailMap[$idKegiatan]['acceptedParticipant']++;
+                          } else if($activityDetail->status == null) {
+                            $activityDetailMap[$idKegiatan]['acceptedParticipant'] = null;
                           }
                         }
 
                         foreach($activityDetailMap as $idKegiatan => $activityDetail) {
                           $participantQuota = $activityDetail['participantQuota'];
                           $acceptedParticipant = $activityDetail['acceptedParticipant'];
-                          if($acceptedParticipant < $participantQuota) {
+                          if($acceptedParticipant < $participantQuota || $acceptedParticipant == null) {
                             $activityId = $activityDetail['activityId'];
                             $activityName = $activityDetail['activityName'];
                       ?>
