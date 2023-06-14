@@ -52,6 +52,16 @@ class Kegiatan_model extends CI_Model {
     return $this->db->get('pembinaan')->row();
   }
 
+  public function getDetailKegiatanById($id) {
+    $this->db->select('*');
+    $this->db->from('pembinaan');
+    $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
+    $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
+    $this->db->where('pembinaan.id_kegiatan', $id);
+    // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
+    return $this->db->get()->result();
+	}
+
   public function add($data) {
     return $this->db->insert('pembinaan', $data);
   }
@@ -67,7 +77,7 @@ class Kegiatan_model extends CI_Model {
   }
 
   public function delete($id) {
-    $this->db->where('kode_kegiatan', $id);
+    $this->db->where('id_kegiatan', $id);
     return $this->db->delete('pembinaan');
   }
 }

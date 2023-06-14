@@ -148,7 +148,7 @@ class Kegiatan extends CI_Controller {
 	}
 
   public function detail_data($id) {
-    $data['data'] = $this->kegiatan_model->getDetailKegiatan();
+    $data['data'] = $this->kegiatan_model->getDetailKegiatanById($id);
     $data['activityData'] = $this->kegiatan_model->getAll();
     $data['instructor2Data'] = $this->kegiatan_model->getInstructor2();
     $data['classData'] = $this->kegiatan_model->getClass();
