@@ -37,8 +37,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_peserta' || $this->uri->segment(1) == 'laporan_presensi' ? 'menu-open' : null?>">
-          <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_peserta' || $this->uri->segment(1) == 'laporan_presensi' ? 'active' : null?>">
+        <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' ? 'menu-open' : null?>">
+          <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' ? 'active' : null?>">
             <i class="nav-icon fas fa-file"></i>
             <p>
               Kegiatan Pembinaan
@@ -54,14 +54,14 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="<?=site_url('laporan_peserta')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_peserta' ? 'active' : null?>">
                 <i class="nav-icon far fa-circle"></i>
                 <p>
                   Laporan Peserta
                 </p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="<?=site_url('laporan_presensi')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_presensi' ? 'active' : null?>">
                 <i class="nav-icon far fa-circle"></i>
