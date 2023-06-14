@@ -48,13 +48,37 @@
                     <label for="kegiatan">Jenis Kegiatan *</label>
                     <select name="kegiatan" id="kegiatan" class="custom-select" required>
                       <option value=""> - Pilih - </option>
-                      <?php 
-                        foreach($data as $kegiatan) { 
-                          if($kegiatan->kategori !== '3') {
-                            $idKegiatan = $kegiatan->id_kegiatan;
-                            $namaKegiatan = $kegiatan->nama_kegiatan;
+                      <?php
+                        // foreach($data as $kegiatan) { 
+                        //   if($kegiatan->kategori !== '3') {
+                        //     $idKegiatan = $kegiatan->id_kegiatan;
+                        //     $namaKegiatan = $kegiatan->nama_kegiatan;
+
+                        $no = 1;
+                        $activityDetailMap = array();
+                        foreach($data as $activityDetail) { 
+                          $idKegiatan = $activityDetail->id_kegiatan;
+                          if(!array_key_exists($idKegiatan, $activityDetailMap)) {
+                            $activityDetailMap[$idKegiatan] = array(
+                              'acceptedParticipant' => 0,
+                              'activityId' => $activityDetail->id_kegiatan,
+                              'activityName' => $activityDetail->nama_kegiatan,
+                              'participantQuota' => $activityDetail->kuota,
+                            );
+                          }
+                          if($activityDetail->status == '1') {
+                            $activityDetailMap[$idKegiatan]['acceptedParticipant']++;
+                          }
+                        }
+
+                        foreach($activityDetailMap as $idKegiatan => $activityDetail) {
+                          $participantQuota = $activityDetail['participantQuota'];
+                          $acceptedParticipant = $activityDetail['acceptedParticipant'];
+                          if($acceptedParticipant < $participantQuota) {
+                            $activityId = $activityDetail['activityId'];
+                            $activityName = $activityDetail['activityName'];
                       ?>
-                        <option value="<?=$idKegiatan?>"><?=$namaKegiatan?></option>
+                        <option value="<?=$activityId?>"><?=$activityName?></option>
                       <?php 
                           }
                         } 

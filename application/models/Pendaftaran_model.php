@@ -3,7 +3,11 @@
 class Pendaftaran_model extends CI_Model {
 
   public function getKegiatan() {
-    return $this->db->get('pembinaan')->result();
+    $this->db->select('*');
+    $this->db->from('pembinaan');
+    $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
+    $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
+    return $this->db->get()->result();
 	}
 
   public function makeIdPeserta() {
