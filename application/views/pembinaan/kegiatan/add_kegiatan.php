@@ -83,6 +83,10 @@
                       </div>
                     </div>
                     <div class="form-group">
+                      <label for="kuota">Kuota Peserta *</label>
+                      <input type="text" name="kuota_peserta" id="kuota" class="form-control" required>
+                    </div>
+                    <div class="form-group">
                       <label for="instruktur1">Instruktur 1 *</label>
                       <select name="id_instruktur_1" id="instruktur1" class="custom-select" required>
                         <option value=""> - Pilih - </option>

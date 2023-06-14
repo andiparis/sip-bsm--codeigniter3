@@ -42,10 +42,11 @@
                     <th>Nama Kegiatan</th>
                     <th>Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
-                    <th>Instruktur 1</th>
-                    <th>Instruktur 2</th>
-                    <th>Kelas</th>
-                    <th>Keterangan</th>
+                    <th>Peserta</th>
+                    <!-- <th>Instruktur 1</th> -->
+                    <!-- <th>Instruktur 2</th> -->
+                    <!-- <th>Kelas</th> -->
+                    <!-- <th>Keterangan</th> -->
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -62,32 +63,32 @@
                         $kategori = 'Workshop';
 
                       // Show instruktur name
-                      $instruktur1 = $kegiatan->nama;
+                      // $instruktur1 = $kegiatan->nama;
 
-                      if($kegiatan->id_instruktur_2 == null) {
-                        $instruktur2 = '-';
-                      } else {
-                        foreach($data_instruktur_2 as $instruktur) {
-                          if($kegiatan->id_instruktur_2 == $instruktur->id_instruktur)
-                            $instruktur2 = $instruktur->nama;
-                        }
-                      }
+                      // if($kegiatan->id_instruktur_2 == null) {
+                      //   $instruktur2 = '-';
+                      // } else {
+                      //   foreach($data_instruktur_2 as $instruktur) {
+                      //     if($kegiatan->id_instruktur_2 == $instruktur->id_instruktur)
+                      //       $instruktur2 = $instruktur->nama;
+                      //   }
+                      // }
                       
                       // Show kelas name
-                      if($kegiatan->id_kelas == null) {
-                        $namaKelas = '-';
-                      } else {
-                        foreach($data_kelas as $kelas) {
-                          if($kegiatan->id_kelas == $kelas->id_kelas)
-                            $namaKelas = $kelas->nama_kelas;
-                        }
-                      }
+                      // if($kegiatan->id_kelas == null) {
+                      //   $namaKelas = '-';
+                      // } else {
+                      //   foreach($data_kelas as $kelas) {
+                      //     if($kegiatan->id_kelas == $kelas->id_kelas)
+                      //       $namaKelas = $kelas->nama_kelas;
+                      //   }
+                      // }
 
                       // Show keterangan value
-                      if($kegiatan->keterangan == null)
-                        $keterangan = '-';
-                      else
-                        $keterangan = $kegiatan->keterangan;
+                      // if($kegiatan->keterangan == null)
+                      //   $keterangan = '-';
+                      // else
+                      //   $keterangan = $kegiatan->keterangan;
                   ?>
                     <tr>
                       <td style="width: 5%;"><?=$no++?>.</td>
@@ -95,11 +96,15 @@
                       <td><?=$kegiatan->nama_kegiatan?></td>
                       <td><?=$kegiatan->tgl_mulai?></td>
                       <td><?=$kegiatan->tgl_berakhir?></td>
-                      <td><?=$instruktur1?></td>
-                      <td><?=$instruktur2?></td>
-                      <td><?=$namaKelas?></td>
-                      <td><?=$keterangan?></td>
-                      <td class="text-center" width="150px">
+                      <!-- <td><?=$instruktur1?></td> -->
+                      <!-- <td><?=$instruktur2?></td> -->
+                      <!-- <td><?=$namaKelas?></td> -->
+                      <!-- <td><?=$keterangan?></td> -->
+                      <td></td>
+                      <td class="text-center" width="100px">
+                        <a href="<?=site_url('kegiatan/detail_data/' . $kegiatan->id_kegiatan)?>" class="btn btn-secondary btn-xs">
+                          <b><i class="fas fa-info"></i> Detail</b>
+                        </a>
                         <a href="<?=site_url('kegiatan/edit_data/' . $kegiatan->id_kegiatan)?>" class="btn btn-warning btn-xs" style="color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>

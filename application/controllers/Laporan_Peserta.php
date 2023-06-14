@@ -4,7 +4,7 @@ class Laporan_Peserta extends CI_Controller {
 
   function __construct() {
 		parent::__construct();
-    $this->load->model('peserta_model');
+    $this->load->model('laporan_peserta_model');
     $this->load->model('presensi_model');
 	
 		if($this->session->userdata('status') != "login") {
@@ -13,8 +13,8 @@ class Laporan_Peserta extends CI_Controller {
 	}
   
 	public function index() {
-		$data['data'] = $this->peserta_model->getAll();
-    $data['data_kegiatan'] = $this->peserta_model->getKegiatan();
+		$data['data'] = $this->laporan_peserta_model->getAll();
+    $data['data_kegiatan'] = $this->laporan_peserta_model->getKegiatan();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 		$this->load->view('pembinaan/laporan_peserta/show_peserta', $data);
@@ -25,9 +25,9 @@ class Laporan_Peserta extends CI_Controller {
     $data = [
       'status' => '1',
     ];
-    $this->peserta_model->changeStatus($id, $data);
+    $this->laporan_peserta_model->changeStatus($id, $data);
 
-    $detailKegiatan = $this->peserta_model->getKegiatan();
+    $detailKegiatan = $this->laporan_peserta_model->getKegiatan();
     foreach($detailKegiatan as $kegiatan) {
       if($id == $kegiatan->id_peserta) {
         $tglMulai = $kegiatan->tgl_mulai;
@@ -58,7 +58,7 @@ class Laporan_Peserta extends CI_Controller {
     $data = [
       'status' => '0',
     ];
-    $this->peserta_model->changeStatus($id, $data);
+    $this->laporan_peserta_model->changeStatus($id, $data);
     redirect('peserta');
 	}
 }
