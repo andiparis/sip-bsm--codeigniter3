@@ -2,6 +2,43 @@
 
 class Presensi_model extends CI_Model {
 
+  public function getKegiatan() {
+    $sql = "SELECT * FROM pembinaan 
+            WHERE pembinaan.kategori = '1' || '2' AND pembinaan.tgl_berakhir > DATE(NOW());";
+    return $this->db->query($sql)->result();
+  }
+
+  public function getParticipantId($id) {
+    $sql = "SELECT peserta_pembinaan.id_peserta_pembinaan 
+            FROM pembinaan 
+            JOIN peserta_pembinaan 
+            ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
+            JOIN peserta 
+            ON peserta_pembinaan.id_peserta = peserta.id_peserta 
+            WHERE pembinaan.id_kegiatan = 'P001' AND peserta.status = '1';";
+    return $this->db->query($sql)->result();
+  }
+
+  public function getParticipantByActivityId($id) {
+    $sql = "SELECT * FROM pembinaan
+            JOIN peserta_pembinaan 
+            ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
+            JOIN peserta 
+            ON peserta_pembinaan.id_peserta = peserta.id_peserta 
+            WHERE pembinaan.id_kegiatan = 'P001' AND peserta.status = '1';";
+    return $this->db->query($sql)->result();
+	}
+
+  // public function getDetailKegiatan() {
+  //   $sql = "SELECT * FROM peserta_pembinaan
+  //           RIGHT JOIN pembinaan
+  //           ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan
+  //           LEFT JOIN peserta
+  //           ON peserta_pembinaan.id_peserta = peserta.id_peserta;";
+  //   $query = $this->db->query($sql);
+  //   return $query->result();
+	// }
+
   public function makeIdPresensi() {
     $sql = 'SELECT MAX(MID(id_presensi, 7, 5)) as id
             FROM presensi
