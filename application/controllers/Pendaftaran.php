@@ -59,6 +59,7 @@ class Pendaftaran extends CI_Controller {
 				'alamat' => $this->input->POST('alamat'),
         'email' => $email,
         'tgl_daftar' => date('Y/m/d'),
+        'status' => '0',
 			];
 			$this->pendaftaran_model->addPeserta($dataPeserta);
       $dataPesertaPembinaan = [

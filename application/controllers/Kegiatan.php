@@ -96,6 +96,11 @@ class Kegiatan extends CI_Controller {
         'label' => 'Nama Kegiatan', 
         'rules' => 'max_length[50]',
       ),
+      array(
+        'field' => 'kuota_peserta', 
+        'label' => 'Kuota Peserta', 
+        'rules' => 'numeric',
+      ),
 			array(
         'field' => 'keterangan', 
         'label' => 'Keterangan', 
@@ -123,6 +128,7 @@ class Kegiatan extends CI_Controller {
         'kategori' => $this->input->POST('kategori_kegiatan'),
         'tgl_mulai' => $this->input->POST('tgl_mulai'),
         'tgl_berakhir' => $this->input->POST('tgl_berakhir'),
+        'kuota' => $this->input->POST('kuota_peserta'),
         'id_instruktur_1' => $this->input->POST('id_instruktur_1'),
         'id_instruktur_2' => $idInstruktur2,
         'id_kelas' => $idKelas,
@@ -158,7 +164,7 @@ class Kegiatan extends CI_Controller {
 		$this->load->view('templates/footer');
   }
 
-  public function setujui_pendaftaran($id) {
+  public function setujui_pendaftaran($activityId, $id) {
     $data = [
       'status' => '1',
     ];
@@ -189,14 +195,14 @@ class Kegiatan extends CI_Controller {
       ];
       $this->presensi_model->add($presensiData);
     }
-    redirect('kegiatan/detail_data/' . $idKegiatan);
+    redirect('kegiatan/detail_data/' . $activityId);
 	}
 
-  public function tolak_pendaftaran($id) {
+  public function tolak_pendaftaran($activityId, $id) {
     $data = [
-      'status' => '0',
+      'status' => '2',
     ];
     $this->kegiatan_model->changeStatus($id, $data);
-    redirect('kegiatan/detail_data/' . $idKegiatan);
+    redirect('kegiatan/detail_data/' . $activityId);
 	}
 }

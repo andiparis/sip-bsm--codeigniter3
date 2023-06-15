@@ -126,12 +126,12 @@
                       else
                         $email = $detailKegiatan->email;
                       
-                      if($detailKegiatan->status == '1')
-                        $status = 'Disetujui';
-                      else if($detailKegiatan->status == '0')
-                        $status = 'Ditolak';
-                      else
+                      if($detailKegiatan->status == '0')
                         $status = 'Menunggu';
+                      else if($detailKegiatan->status == '1')
+                        $status = 'Disetujui';
+                      else if($detailKegiatan->status == '2')
+                        $status = 'Ditolak';
                       
                       // foreach($data as $detailKegiatan) {
                       //   if($detailKegiatan->id_peserta == $kegiatan->id_peserta)
@@ -149,11 +149,11 @@
                       <!-- <td><?=$jenis_kegiatan?></td> -->
                       <td><?=$status?></td>
                       <td class="text-center" width="150px">
-                        <?php if($detailKegiatan->status == null) { ?>
-                        <a href="<?=site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_peserta)?>" class="btn btn-success btn-xs">
+                        <?php if($detailKegiatan->status == '0') { ?>
+                        <a href="<?=site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta)?>" class="btn btn-success btn-xs">
                           <b>Setujui</b>
                         </a>
-                        <a href="<?=site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
+                        <a href="<?=site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
                           <b>Tolak</b>
                         </a>
                         <?php } ?>

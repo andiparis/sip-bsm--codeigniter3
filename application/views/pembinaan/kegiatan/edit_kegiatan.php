@@ -110,6 +110,10 @@
                       </select>
                     </div>
                     <div class="form-group">
+                      <label for="kuota">Kuota Peserta *</label>
+                      <input type="text" name="kuota_peserta" id="kuota" value="<?=$kegiatan->kuota?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
                       <label for="keterangan">Keterangan</label>
                       <textarea name="keterangan" id="keterangan" rows="3" class="form-control"><?=$kegiatan->keterangan?></textarea>
                     </div>
