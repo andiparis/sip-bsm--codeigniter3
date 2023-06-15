@@ -91,6 +91,14 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a href="<?=site_url('presensi')?>" class="nav-link <?=$this->uri->segment(1) == 'presensi' ? 'active' : null?>">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Presensi
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
