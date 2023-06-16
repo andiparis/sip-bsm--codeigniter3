@@ -5,83 +5,73 @@ class Permohonan extends CI_Controller {
   function __construct() {
 		parent::__construct();
     $this->load->model('permohonan_model');
-    $this->load->model('auth_model');
 	}
   
 	public function index() {
-    // $data['data'] = $this->permohonan_model->getKegiatan();
+    $this->load->view('templates/header_user');
 		$this->load->view('workshop/permohonan/permohonan');
+    $this->load->view('templates/footer_user');
 	}
 
-	public function add_data() {
+	public function addRequest() {
     $config = array(
 			array(
-        'field' => 'nama', 
+        'field' => 'name', 
         'label' => 'Nama Lengkap', 
         'rules' => 'max_length[50]',
       ),
-      array(
-        'field' => 'jk', 
-        'label' => 'Jenis Kelamin', 
-        'rules' => 'max_length[1]',
-      ),
 			array(
-        'field' => 'telp', 
+        'field' => 'phone', 
         'label' => 'No. Telp', 
         'rules' => 'max_length[15]|numeric',
       ),
       array(
-        'field' => 'alamat', 
-        'label' => 'Alamat', 
+        'field' => 'activity_name', 
+        'label' => 'Nama Kegiatan', 
+        'rules' => 'max_length[50]',
+      ),
+      array(
+        'field' => 'location', 
+        'label' => 'Alamat Kegiatan', 
         'rules' => 'max_length[100]',
       ),
       array(
-        'field' => 'email', 
-        'label' => 'Email', 
-        'rules' => 'max_length[50]',
+        'field' => 'note', 
+        'label' => 'Keterangan', 
+        'rules' => 'max_length[100]',
       ),
 		);
 		$this->form_validation->set_rules($config);	
 
     if ($this->form_validation->run()) {
-			// $this->pendaftaran_model->addPeserta($dataPeserta);
-      // $dataPresensi = [
-      //   'id_peserta' => $this->input->POST('id_peserta'),
-      //   'kode_kegiatan' => $this->input->POST('kegiatan'),
-      // ];
-      // $this->pendaftaran_model->addPresensi($dataPresensi);
-			// redirect('pendaftaran');
-
-      $dataPermohonan = $this->input->POST('kode_permohonan');
-      $configUpload['upload_path']    = FCPATH.'/upload/surat_permohonan/';
+      $requestId = $this->permohonan_model->makeRequestId();
+      $configUpload['upload_path']    = FCPATH.'/uploads/activity_letter/';
       $configUpload['allowed_types']  = 'pdf|jpg|jpeg|png';
-      $configUpload['file_name']      = $dataPermohonan;
+      $configUpload['file_name']      = $requestId;
       $configUpload['overwrite']      = true;
       $configUpload['max_size']       = 1024;
       $this->load->library('upload', $configUpload);
 
-      if (!$this->upload->do_upload('surat_kegiatan')) {
+      if (!$this->upload->do_upload('activity_letter')) {
         $data['error'] = $this->upload->display_errors();
+        echo $data['error'];
       } else {
         $uploadedData = $this->upload->data();
-  
-        // $newData = [
-        // 'surat_kegiatan' => $uploadedData['file_name'],
-        // ];
       }
 
-      $dataPermohonan = [
-        'kode_permohonan' => $this->input->POST('kode_permohonan'),
-        'nama_pemohon' => $this->input->POST('nama_pemohon'),
-				'telp' => $this->input->POST('telp'),
-				'nama_kegiatan' => $this->input->POST('nama_kegiatan'),
-				'alamat_kegiatan' => $this->input->POST('alamat_kegiatan'),
+      $data = [
+        'id_permohonan' => $requestId,
+        'nama_pemohon' => $this->input->post('name_of_requester'),
+				'telp' => $this->input->post('phone'),
+				'nama_kegiatan' => $this->input->post('activity_name'),
+				'alamat_kegiatan' => $this->input->post('activity_location'),
         'tgl_permohonan' => date('Y/m/d'),
         'surat_kegiatan' => $uploadedData['file_name'],
-        'keterangan' => $this->input->POST('keterangan'),
+        'status_permohonan' => '0',
+        'keterangan' => $this->input->post('note'),
 			];
 
-      $this->permohonan_model->add($dataPermohonan);
+      $this->permohonan_model->addRequest($data);
       redirect('permohonan');
 		}
   }
