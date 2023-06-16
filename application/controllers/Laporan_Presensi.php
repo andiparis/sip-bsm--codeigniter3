@@ -12,10 +12,11 @@ class Laporan_Presensi extends CI_Controller {
 	}
   
 	public function index() {
-		$data['data'] = $this->laporan_presensi_model->getAll();
+		$data['activityData'] = $this->laporan_presensi_model->getActivity();
+    $data['attendanceData'] = $this->laporan_presensi_model->getAttendancesHeld();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
-		$this->load->view('pembinaan/laporan_presensi/show_rekapitulasi_presensi', $data);
+		$this->load->view('pembinaan/laporan_presensi/show_activity', $data);
 		$this->load->view('templates/footer');
 	}
 
