@@ -9,7 +9,7 @@ class Permohonan extends CI_Controller {
   
 	public function index() {
     $this->load->view('templates/header_user');
-		$this->load->view('workshop/permohonan/permohonan');
+		$this->load->view('workshop/request/workshop_request');
     $this->load->view('templates/footer_user');
 	}
 

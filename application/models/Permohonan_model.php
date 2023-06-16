@@ -10,7 +10,7 @@ class Permohonan_model extends CI_Model {
     if ($query->num_rows() > 0) {
       $row = $query->row();
       $increamentNo = ((int)$row->id) + 1;
-      $no = sprintf("%'.04d", $increamentNo);
+      $no = sprintf("%'.03d", $increamentNo);
     } else {
       $no = '001';
     }
