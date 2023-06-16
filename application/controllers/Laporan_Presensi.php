@@ -20,6 +20,14 @@ class Laporan_Presensi extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+  public function attendanceReport($activityId) {
+    $data['attendanceReport'] = $this->laporan_presensi_model->getParticipantAttendance($activityId);
+    $this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$this->load->view('pembinaan/laporan_presensi/show_attendance_report', $data);
+		$this->load->view('templates/footer');
+  }
+
   // public function setujui_pendaftaran($id) {
   //   $data = [
   //     'status' => '1',
