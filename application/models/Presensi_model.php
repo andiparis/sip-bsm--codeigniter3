@@ -4,7 +4,8 @@ class Presensi_model extends CI_Model {
 
   public function getKegiatan() {
     $sql = "SELECT * FROM pembinaan 
-            WHERE pembinaan.kategori = '1' || '2' AND pembinaan.tgl_berakhir > DATE(NOW());";
+            WHERE pembinaan.kategori IN ('1', '2') 
+            AND DATE_ADD(pembinaan.tgl_berakhir, INTERVAL 1 MONTH) > CURDATE();";
     return $this->db->query($sql)->result();
   }
 
@@ -15,7 +16,7 @@ class Presensi_model extends CI_Model {
             ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
             JOIN peserta 
             ON peserta_pembinaan.id_peserta = peserta.id_peserta 
-            WHERE pembinaan.id_kegiatan = 'P001' AND peserta.status = '1';";
+            WHERE pembinaan.id_kegiatan = '$id' AND peserta.status = '1';";
     return $this->db->query($sql)->result();
   }
 
@@ -25,7 +26,7 @@ class Presensi_model extends CI_Model {
             ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
             JOIN peserta 
             ON peserta_pembinaan.id_peserta = peserta.id_peserta 
-            WHERE pembinaan.id_kegiatan = 'P001' AND peserta.status = '1';";
+            WHERE pembinaan.id_kegiatan = '$id' AND peserta.status = '1';";
     return $this->db->query($sql)->result();
 	}
 
