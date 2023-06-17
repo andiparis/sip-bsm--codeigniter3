@@ -39,10 +39,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kegiatan/add_data')?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Kegiatan *</label>
-                      <input type="text" name="id_kegiatan" id="id" class="form-control" required autofocus>
-                    </div>
-                    <div class="form-group">
                       <label for="permohonan">Permohonan Workshop</label>
                       <select name="id_permohonan" id="permohonan" class="custom-select">
                         <option value=""> - Pilih - </option>
@@ -83,8 +79,8 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="kuota">Kuota Peserta *</label>
-                      <input type="text" name="kuota_peserta" id="kuota" class="form-control" required>
+                      <label for="kuota">Kuota Peserta</label>
+                      <input type="text" name="kuota_peserta" id="kuota" class="form-control">
                     </div>
                     <div class="form-group">
                       <label for="instruktur1">Instruktur 1 *</label>

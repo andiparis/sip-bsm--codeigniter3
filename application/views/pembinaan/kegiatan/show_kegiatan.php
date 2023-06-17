@@ -86,29 +86,34 @@
                       $duplicateCount = $activityDetail['duplicateCount'];
 
                       if($activityCategory == '1') {
-                        $activityCategory = 'Magang';
+                        $category = 'Magang';
                       } else if($activityCategory == '2') {
-                        $activityCategory = 'Pelatihan';
+                        $category = 'Pelatihan';
                       } else {
-                        $activityCategory = 'Workshop';
+                        $category = 'Workshop';
                       }                   
                   ?>
                     <tr>
-                      <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$activityCategory?></td>
-                      <td><?=$activityName?></td>
-                      <td><?=$startDate?></td>
-                      <td><?=$endDate?></td>
-                      <td><?=$acceptedParticipant . ' / ' . $participantQuota?></td>
-                      <td><?=$waitingParticipant?></td>
+                      <td style="width: 5%;"><?= $no++ ?>.</td>
+                      <td><?= $category ?></td>
+                      <td><?= $activityName ?></td>
+                      <td><?= $startDate ?></td>
+                      <td><?= $endDate ?></td>
+                      <?php if ($activityCategory != '3') { ?>
+                        <td><?= $acceptedParticipant . ' / ' . $participantQuota ?></td>
+                        <td><?= $waitingParticipant ?></td>
+                      <?php } else { ?>
+                        <td> - </td>
+                        <td> - </td>
+                      <?php } ?>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('kegiatan/detail_data/' . $activityId)?>" class="btn btn-secondary btn-xs">
+                        <a href="<?= site_url('kegiatan/detail_data/' . $activityId) ?>" class="btn btn-secondary btn-xs">
                           <b><i class="fas fa-info"></i> Detail</b>
                         </a>
-                        <a href="<?=site_url('kegiatan/edit_data/' . $activityId)?>" class="btn btn-warning btn-xs" style="color: white;">
+                        <a href="<?= site_url('kegiatan/edit_data/' . $activityId) ?>" class="btn btn-warning btn-xs" style="color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?=site_url('kegiatan/delete_data/' . $activityId)?>" class="btn btn-danger btn-xs">
+                        <a href="<?= site_url('kegiatan/delete_data/' . $activityId) ?>" class="btn btn-danger btn-xs">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>

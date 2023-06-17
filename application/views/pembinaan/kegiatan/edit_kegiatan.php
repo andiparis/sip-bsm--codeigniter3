@@ -39,10 +39,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kegiatan/edit_data/' . $kegiatan->id_kegiatan)?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Kegiatan *</label>
-                      <input type="text" name="id_kegiatan" id="id" value="<?=$kegiatan->id_kegiatan?>" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
                       <label for="permohonan">Permohonan Workshop</label>
                       <select name="id_permohonan" id="permohonan" class="custom-select">
                         <option value=""> - Pilih - </option>
@@ -110,8 +106,8 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="kuota">Kuota Peserta *</label>
-                      <input type="text" name="kuota_peserta" id="kuota" value="<?=$kegiatan->kuota?>" class="form-control" required>
+                      <label for="kuota">Kuota Peserta</label>
+                      <input type="text" name="kuota_peserta" id="kuota" value="<?=$kegiatan->kuota?>" class="form-control">
                     </div>
                     <div class="form-group">
                       <label for="keterangan">Keterangan</label>

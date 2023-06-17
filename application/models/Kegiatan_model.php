@@ -24,11 +24,13 @@ class Kegiatan_model extends CI_Model {
     return $query->result();
 	}
 
-  public function getPermohonan() {
-    // $this->db->select('*');
-    // $this->db->from('pembinaan');
-    // $this->db->join('workshop', 'pembinaan.id_permohonan = workshop.id_permohonan');
-    return $this->db->get('workshop')->result();
+  public function getWorkshopRequest() {
+    $this->db->select('*');
+    $this->db->from('pembinaan');
+    $this->db->join('workshop', 'pembinaan.id_permohonan = workshop.id_permohonan', 'right');
+    $this->db->where('workshop.status_permohonan', '1');
+    $this->db->where('pembinaan.id_permohonan IS NULL');
+    return $this->db->get()->result();
   }
 
   public function getInstructor2() {
@@ -67,6 +69,22 @@ class Kegiatan_model extends CI_Model {
     // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
     return $this->db->get()->result();
 	}
+
+  public function makeActivityId() {
+    $sql = 'SELECT MAX(MID(id_kegiatan, 7, 3)) as id
+            FROM pembinaan
+            WHERE MID(id_kegiatan, 3, 4) = DATE_FORMAT(CURRENT_DATE(), "%y%m")';
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      $row = $query->row();
+      $increamentNo = ((int)$row->id) + 1;
+      $no = sprintf("%'.03d", $increamentNo);
+    } else {
+      $no = '001';
+    }
+    $requestId = 'PB'.date('ym').$no;
+    return $requestId;
+  }
 
   public function add($data) {
     return $this->db->insert('pembinaan', $data);

@@ -5,7 +5,6 @@ class Kegiatan extends CI_Controller {
   function __construct() {
 		parent::__construct();
     $this->load->model('kegiatan_model');
-    $this->load->model('presensi_model');
 	
 		if($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
@@ -51,26 +50,35 @@ class Kegiatan extends CI_Controller {
 		$this->form_validation->set_rules($config);	
 
     $idPermohonan = $this->input->post('id_permohonan');
+    $quota = $this->input->post('kuota_peserta');
     $idInstruktur2 = $this->input->post('id_instruktur_2');
     $idKelas = $this->input->post('id_kelas');
-    if($idPermohonan == '')
-      $idPermohonan = null;
-    
-    if($idInstruktur2 == '')
-      $idInstruktur2 = null;
 
-    if($idKelas == '')
+    if ($idPermohonan == '') {
+      $idPermohonan = null;
+    }
+
+    if ($quota == '') {
+      $quota = null;
+    }
+    
+    if ($idInstruktur2 == '') {
+      $idInstruktur2 = null;
+    }
+
+    if ($idKelas == '') {
       $idKelas = null;
+    }
 	
-	 	if($this->form_validation->run()) {
+	 	if ($this->form_validation->run()) {
 			$data = [
-        'id_kegiatan' => $this->input->POST('id_kegiatan'),
+        'id_kegiatan' => $this->kegiatan_model->makeActivityId(),
 				'id_permohonan' => $idPermohonan,
 				'nama_kegiatan' => $this->input->POST('nama_kegiatan'),
         'kategori' => $this->input->POST('kategori_kegiatan'),
         'tgl_mulai' => $this->input->POST('tgl_mulai'),
         'tgl_berakhir' => $this->input->POST('tgl_berakhir'),
-        'kuota' => $this->input->POST('kuota_peserta'),
+        'kuota' => $quota,
         'id_instruktur_1' => $this->input->POST('id_instruktur_1'),
         'id_instruktur_2' => $idInstruktur2,
         'id_kelas' => $idKelas,
@@ -79,7 +87,7 @@ class Kegiatan extends CI_Controller {
 			$this->kegiatan_model->add($data);
 			redirect('kegiatan');
 		} else {
-      $data['data_permohonan'] = $this->kegiatan_model->getPermohonan();
+      $data['data_permohonan'] = $this->kegiatan_model->getWorkshopRequest();
       $data['data_instruktur'] = $this->kegiatan_model->getInstrukturName();
       $data['data_kelas'] = $this->kegiatan_model->getKelasName();
 			$this->load->view('templates/header');
@@ -110,25 +118,33 @@ class Kegiatan extends CI_Controller {
 		$this->form_validation->set_rules($config);
 
     $idPermohonan = $this->input->post('id_permohonan');
+    $quota = $this->input->post('kuota_peserta');
     $idInstruktur2 = $this->input->post('id_instruktur_2');
     $idKelas = $this->input->post('id_kelas');
-    if($idPermohonan == '')
-      $idPermohonan = null;
-    
-    if($idInstruktur2 == '')
-      $idInstruktur2 = null;
 
-    if($idKelas == '')
+    if ($idPermohonan == '') {
+      $idPermohonan = null;
+    }
+
+    if ($quota == '') {
+      $quota = null;
+    }
+    
+    if ($idInstruktur2 == '') {
+      $idInstruktur2 = null;
+    }
+
+    if ($idKelas == '') {
       $idKelas = null;
+    }
 
 		if($this->form_validation->run()) {
 			$data = [
-				'id_permohonan' => $idPermohonan,
 				'nama_kegiatan' => $this->input->POST('nama_kegiatan'),
         'kategori' => $this->input->POST('kategori_kegiatan'),
         'tgl_mulai' => $this->input->POST('tgl_mulai'),
         'tgl_berakhir' => $this->input->POST('tgl_berakhir'),
-        'kuota' => $this->input->POST('kuota_peserta'),
+        'kuota' => $quota,
         'id_instruktur_1' => $this->input->POST('id_instruktur_1'),
         'id_instruktur_2' => $idInstruktur2,
         'id_kelas' => $idKelas,
@@ -138,7 +154,7 @@ class Kegiatan extends CI_Controller {
 			redirect('kegiatan');
 		} else {
 			$data['kegiatan'] = $this->kegiatan_model->getById($id);
-      $data['data_permohonan'] = $this->kegiatan_model->getPermohonan();
+      $data['data_permohonan'] = $this->kegiatan_model->getWorkshopRequest();
       $data['data_instruktur'] = $this->kegiatan_model->getInstrukturName();
       $data['data_kelas'] = $this->kegiatan_model->getKelasName();
 			$this->load->view('templates/header');
@@ -170,31 +186,31 @@ class Kegiatan extends CI_Controller {
     ];
     $this->kegiatan_model->changeStatus($id, $data);
 
-    $detailKegiatan = $this->kegiatan_model->getDetailKegiatan();
-    foreach($detailKegiatan as $kegiatan) {
-      if($id == $kegiatan->id_peserta) {
-        $idKegiatan = $kegiatan->id_kegiatan;
-        $tglMulai = $kegiatan->tgl_mulai;
-        $tglBerakhir = $kegiatan->tgl_berakhir;
-        $idPesertaPembinaan = $kegiatan->id_peserta_pembinaan;
-      }
-    }
+    // $detailKegiatan = $this->kegiatan_model->getDetailKegiatan();
+    // foreach($detailKegiatan as $kegiatan) {
+    //   if($id == $kegiatan->id_peserta) {
+    //     $idKegiatan = $kegiatan->id_kegiatan;
+    //     $tglMulai = $kegiatan->tgl_mulai;
+    //     $tglBerakhir = $kegiatan->tgl_berakhir;
+    //     $idPesertaPembinaan = $kegiatan->id_peserta_pembinaan;
+    //   }
+    // }
 
-    $dateInterval = new DatePeriod(
-      new DateTime($tglMulai),
-      new DateInterval('P1D'),
-      new DateTime($tglBerakhir . '+ 1 day'),
-    );
+    // $dateInterval = new DatePeriod(
+    //   new DateTime($tglMulai),
+    //   new DateInterval('P1D'),
+    //   new DateTime($tglBerakhir . '+ 1 day'),
+    // );
 
-    foreach($dateInterval as $data) {
-      $presensiData = [
-        'id_presensi' => $this->presensi_model->makeIdPresensi(),
-        'tgl' => $data->format('Y-m-d'),
-        'status_kehadiran' => null,
-        'id_peserta_pembinaan' => $idPesertaPembinaan,
-      ];
-      $this->presensi_model->add($presensiData);
-    }
+    // foreach($dateInterval as $data) {
+    //   $presensiData = [
+    //     'id_presensi' => $this->presensi_model->makeIdPresensi(),
+    //     'tgl' => $data->format('Y-m-d'),
+    //     'status_kehadiran' => null,
+    //     'id_peserta_pembinaan' => $idPesertaPembinaan,
+    //   ];
+    //   $this->presensi_model->add($presensiData);
+    // }
     redirect('kegiatan/detail_data/' . $activityId);
 	}
 
