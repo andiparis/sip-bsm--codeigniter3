@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign In</title>
+  <title>Register sebagai Instruktur</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,8 +22,8 @@
   </div>
   <div class="card card-outline card-primary">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Masuk untuk dapat menggunakan sistem</p>
-      <form action="<?= site_url('auth/process') ?>" method="post">
+      <p class="login-box-msg">Daftar sebagai instruktur</p>
+      <form action="<?= site_url('auth/register') ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" name="username" class="form-control" placeholder="Username">
           <div class="input-group-append">
@@ -40,23 +40,31 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="text" name="name" class="form-control" placeholder="Full name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-address-card"></span>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-8"></div>
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <?php
-        if ($this->session->flashdata('error')) {
-          echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-        }
-      ?>
+      <?php if (isset($errors)) { ?>
+        <div class="error">
+          <?php echo $errors; ?>
+        </div>
+      <?php } ?>
 
       <p class="mb-0">
-        <a href="<?= site_url('auth/register') ?>" class="text-center">Daftar sebagai instruktur</a>
+        <a href="<?= site_url('auth') ?>" class="text-center">Sudah mempunyai akun</a>
       </p>
     </div>
     <!-- /.card-body -->

@@ -39,13 +39,13 @@
       <!-- User account -->
       <li class="nav-item dropdown user user-menu">
         <a href="#" class="nav-link" data-toggle="dropdown">
-          <span class="username" style="margin-right: 7px;"><?php echo ucfirst($this->session->userdata("name")); ?></span>
+          <span class="username" style="margin-right: 7px;"><?php echo ucfirst($this->session->userdata('name')); ?></span>
           <img src="<?=base_url()?>assets/dist/img/user.png" class="user-image" alt="User Image">
         </a>
         <ul class="dropdown-menu">
           <li class="user-header">
             <img src="<?=base_url()?>assets/dist/img/user.png" class="img-circle">
-            <p><?php echo ucfirst($this->session->userdata("name")); ?></p>
+            <p><?php echo ucfirst($this->session->userdata('fullName')); ?></p>
           </li>
           <li class="user-footer">
             <a href="<?=site_url('auth/logout')?>" class="btn btn-danger float-sm-right">Sign Out</a>
