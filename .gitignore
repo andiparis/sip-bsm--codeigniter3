@@ -33,3 +33,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 # AdminLTE 3 Assets
 /assets
+
+# File uploads
+/uploads/activity_letter
