@@ -3,8 +3,16 @@
 class Auth_model extends CI_Model {
 
   public function loginCheck($table, $where) {
-		return $this->db->get_where($table, $where);
+		// return $this->db->get_where($table, $where);
+    return $this->db->get_where($table, $where)->row();
 	}
+
+  public function getInstructorByUserId($id) {
+    $this->db->select('*');
+    $this->db->from('instruktur');
+    $this->db->where('id_user', $id);
+    return $this->db->get()->row();
+  }
 
   public function makeUserId() {
     $sql = "SELECT MAX(MID(id_user, 4, 2)) as id

@@ -2,10 +2,11 @@
 
 class Presensi_model extends CI_Model {
 
-  public function getKegiatan() {
+  public function getKegiatan($id) {
     $sql = "SELECT * FROM pembinaan 
             WHERE pembinaan.kategori IN ('1', '2') 
-            AND DATE_ADD(pembinaan.tgl_berakhir, INTERVAL 1 MONTH) > CURDATE();";
+            AND DATE_ADD(pembinaan.tgl_berakhir, INTERVAL 1 MONTH) > CURDATE()
+            AND (pembinaan.id_instruktur_1 = '$id' OR pembinaan.id_instruktur_2 = '$id')";
     return $this->db->query($sql)->result();
   }
 

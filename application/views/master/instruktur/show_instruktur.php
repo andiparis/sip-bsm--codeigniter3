@@ -37,44 +37,57 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>ID</th>
                     <th>Nama</th>
                     <th>Jenis Kelamin</th>
                     <th>No. Telp</th>
                     <th>Email</th>
                     <th>Alamat</th>
                     <th>Keahlian</th>
+                    <th>Status Akun</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
-                    foreach($data as $instruktur) { 
-                      if($instruktur->jk == 'l')
+                    foreach ($data as $instruktur) { 
+                      $accountStatus = $instruktur->id_user;
+
+                      if ($instruktur->jk == 'l') {
                         $jk = 'Laki-laki';
-                      else
+                      } else {
                         $jk = 'Perempuan';
+                      }
+
+                      if ($accountStatus != null) {
+                        $accountStatus = 'Terhubung';
+                      } else {
+                        $accountStatus = 'Tidak Terhubung';
+                      }
                   ?>
+
                     <tr>
-                      <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$instruktur->id_instruktur?></td>
-                      <td><?=$instruktur->nama?></td>
-                      <td><?=$jk?></td>
-                      <td><?=$instruktur->telp?></td>
-                      <td><?=$instruktur->email?></td>
-                      <td><?=$instruktur->alamat?></td>
-                      <td><?=$instruktur->keahlian?></td>
+                      <td style="width: 5%;"><?= $no++ ?>.</td>
+                      <td><?= $instruktur->nama ?></td>
+                      <td><?= $jk ?></td>
+                      <td><?= $instruktur->telp ?></td>
+                      <td><?= $instruktur->email ?></td>
+                      <td><?= $instruktur->alamat ?></td>
+                      <td><?= $instruktur->keahlian ?></td>
+                      <td><?= $accountStatus ?></td>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('instruktur/edit_data/' . $instruktur->id_instruktur)?>" class="btn btn-warning btn-xs" style="color: white;">
+                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-xs" style="color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?=site_url('instruktur/delete_data/' . $instruktur->id_instruktur)?>" class="btn btn-danger btn-xs">
+                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-xs">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>
                     </tr>
+                    
                   <?php } ?>
+
                 </tbody>
               </table>
             </div>

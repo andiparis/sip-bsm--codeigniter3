@@ -59,8 +59,13 @@ class Instruktur extends CI_Controller {
         'rules' => 'max_length[50]',
       ),
 		);
-		$this->form_validation->set_rules($config);	
+		$this->form_validation->set_rules($config);
 	
+    $userAccount = $this->input->post('user_account');
+    if ($userAccount == '') {
+      $userAccount == null;
+    }
+
 	 	if($this->form_validation->run()) {
 			$data = [
 				'id_instruktur' => $this->input->POST('id_instruktur'),
@@ -70,13 +75,15 @@ class Instruktur extends CI_Controller {
 				'email' => $this->input->POST('email'),
         'alamat' => $this->input->POST('alamat'),
         'keahlian' => $this->input->POST('keahlian'),
+        'id_user' => $userAccount,
 			];
 			$this->instruktur_model->add($data);
 			redirect('instruktur');
 		} else {
+      $data['userAccount'] = $this->instruktur_model->getUserAccount();
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
-			$this->load->view('master/instruktur/add_instruktur');
+			$this->load->view('master/instruktur/add_instruktur', $data);
 			$this->load->view('templates/footer');
 		}
 	}
@@ -116,6 +123,11 @@ class Instruktur extends CI_Controller {
 		);
 		$this->form_validation->set_rules($config);
 
+    $userAccount = $this->input->post('user_account');
+    if ($userAccount == '') {
+      $userAccount == null;
+    }
+
 		if($this->form_validation->run()) {
 			$data = [
 				'nama' => $this->input->POST('nama'),
@@ -124,11 +136,13 @@ class Instruktur extends CI_Controller {
 				'email' => $this->input->POST('email'),
         'alamat' => $this->input->POST('alamat'),
         'keahlian' => $this->input->POST('keahlian'),
+        'id_user' => $userAccount,
 			];
 			$this->instruktur_model->edit($id, $data);
 			redirect('instruktur');
 		} else {
 			$data['instruktur'] = $this->instruktur_model->getById($id);
+      $data['userAccount'] = $this->instruktur_model->getUserAccount();
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
 			$this->load->view('master/instruktur/edit_instruktur', $data);

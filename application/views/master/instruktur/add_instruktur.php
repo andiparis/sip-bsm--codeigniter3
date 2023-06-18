@@ -73,6 +73,15 @@
                       <input type="text" name="keahlian" id="keahlian" class="form-control" required>
                     </div>
                     <div class="form-group">
+                      <label for="account">Akun User</label>
+                      <select name="user_account" id="account" class="custom-select">
+                        <option value=""> - Pilih - </option>
+                        <?php foreach($userAccount as $account) { ?>
+                          <option value="<?=$account->id_user?>"><?=$account->nama?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
                       <button type="submit" class="btn btn-success">
                         <b><i class="fas fa-paper-plane"> Save</i></b>
                       </button>

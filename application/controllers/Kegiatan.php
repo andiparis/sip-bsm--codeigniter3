@@ -169,10 +169,10 @@ class Kegiatan extends CI_Controller {
 		redirect('kegiatan');
 	}
 
-  public function detail_data($id) {
-    $data['data'] = $this->kegiatan_model->getDetailKegiatanById($id);
-    $data['activityData'] = $this->kegiatan_model->getAll();
-    $data['instructor2Data'] = $this->kegiatan_model->getInstructor2();
+  public function detail_data($activityId) {
+    $data['data'] = $this->kegiatan_model->getDetailKegiatanById($activityId);
+    $data['activityData'] = $this->kegiatan_model->getInstructor1($activityId);
+    $data['instructor2Data'] = $this->kegiatan_model->getInstructor2($activityId);
     $data['classData'] = $this->kegiatan_model->getClass();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');

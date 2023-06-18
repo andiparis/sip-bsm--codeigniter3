@@ -73,6 +73,19 @@
                       <input type="text" name="keahlian" id="keahlian" value="<?=$instruktur->keahlian?>" class="form-control" required>
                     </div>
                     <div class="form-group">
+                      <label for="account">Akun User</label>
+                      <select name="user_account" id="account" class="custom-select">
+                        <option value=""> - Pilih - </option>
+
+                        <?php if (empty($userAccount) && $instruktur->id_user != null) { ?>
+                          <option value="<?=$instruktur->id_user?>" selected><?=$instruktur->nama?></option>
+                        <?php } else { foreach ($userAccount as $account) { ?>
+                          <option value="<?=$account->id_user?>" <?=$instruktur->id_user == $account->id_user ? "selected" : null?>><?=$account->nama?></option>
+                        <?php } } ?>
+
+                      </select>
+                    </div>
+                    <div class="form-group">
                       <button type="submit" class="btn btn-success">
                         <b><i class="fas fa-paper-plane"> Save</i></b>
                       </button>

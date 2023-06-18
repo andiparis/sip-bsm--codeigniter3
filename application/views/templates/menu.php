@@ -98,8 +98,16 @@
         <?php } else { ?>
 
           <li class="nav-item">
+            <a href="<?=site_url('jadwal_instruktur')?>" class="nav-link <?=$this->uri->segment(1) == 'jadwal_instruktur' ? 'active' : null?>">
+              <i class="nav-icon far fa-calendar-check"></i>
+              <p>
+                Jadwal Kegiatan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?=site_url('presensi')?>" class="nav-link <?=$this->uri->segment(1) == 'presensi' ? 'active' : null?>">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-check-circle"></i>
               <p>
                 Presensi
               </p>

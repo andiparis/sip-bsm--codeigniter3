@@ -59,10 +59,13 @@ class Auth extends CI_Controller {
 			'username' => $username,
 			'password' => md5($password)
     );
-		$check = $this->auth_model->loginCheck('user', $where)->row();
+		$check = $this->auth_model->loginCheck('user', $where);
 
 		if ($check) {
+      $userId = $check->id_user;
+      $instructorId = $this->auth_model->getInstructorByUserId($userId);
 			$session_data = array(
+        'instructorId' => $instructorId->id_instruktur,
 				'name' => $username,
         'fullName' => $check->nama,
         'userLevel' => $check->level,
@@ -73,7 +76,7 @@ class Auth extends CI_Controller {
       if ($session_data['userLevel'] == '0') {
 			  redirect('dashboard');
       } else {
-        redirect('presensi');
+        redirect('jadwal_instruktur');
       }
 		} else {
       $this->session->set_flashdata('error', 'Sign in failed. Invalid username or password.');

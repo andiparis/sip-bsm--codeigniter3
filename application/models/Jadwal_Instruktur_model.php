@@ -1,37 +1,15 @@
 <?php
 
-class Kegiatan_model extends CI_Model {
+class Jadwal_Instruktur_model extends CI_Model {
 
-  public function getAll() {
+  public function getDetailKegiatan($id) {
     $this->db->select('*');
-    $this->db->from('pembinaan');
-    $this->db->join('instruktur', 'pembinaan.id_instruktur_1 = instruktur.id_instruktur');
+    $this->db->from('peserta_pembinaan');
+    $this->db->join('pembinaan', 'peserta_pembinaan.id_kegiatan = pembinaan.id_kegiatan', 'right');
+    $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta', 'left');
+    $this->db->where("(pembinaan.id_instruktur_1 = '$id' OR pembinaan.id_instruktur_2 = '$id')");
     return $this->db->get()->result();
 	}
-
-  public function getDetailKegiatan() {
-    $sql = "SELECT * FROM `peserta_pembinaan` 
-            RIGHT JOIN `pembinaan` 
-            ON `pembinaan`.`id_kegiatan` = `peserta_pembinaan`.`id_kegiatan` 
-            LEFT JOIN `peserta` 
-            ON `peserta_pembinaan`.`id_peserta` = `peserta`.`id_peserta`;";
-    $query = $this->db->query($sql);
-    // $this->db->select('*');
-    // $this->db->from('pembinaan');
-    // $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
-    // $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
-    // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
-    return $query->result();
-	}
-
-  public function getWorkshopRequest() {
-    $this->db->select('*');
-    $this->db->from('pembinaan');
-    $this->db->join('workshop', 'pembinaan.id_permohonan = workshop.id_permohonan', 'right');
-    $this->db->where('workshop.status_permohonan', '1');
-    $this->db->where('pembinaan.id_permohonan IS NULL');
-    return $this->db->get()->result();
-  }
 
   public function getInstructor1($id) {
     $this->db->select('*');
@@ -53,6 +31,24 @@ class Kegiatan_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('pembinaan');
     $this->db->join('kelas', 'pembinaan.id_kelas = kelas.id_kelas');
+    return $this->db->get()->result();
+  }
+
+
+
+  public function getAll() {
+    $this->db->select('*');
+    $this->db->from('pembinaan');
+    $this->db->join('instruktur', 'pembinaan.id_instruktur_1 = instruktur.id_instruktur');
+    return $this->db->get()->result();
+	}
+
+  public function getWorkshopRequest() {
+    $this->db->select('*');
+    $this->db->from('pembinaan');
+    $this->db->join('workshop', 'pembinaan.id_permohonan = workshop.id_permohonan', 'right');
+    $this->db->where('workshop.status_permohonan', '1');
+    $this->db->where('pembinaan.id_permohonan IS NULL');
     return $this->db->get()->result();
   }
 

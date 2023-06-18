@@ -12,7 +12,8 @@ class Presensi extends CI_Controller {
   }
 
   public function index() {
-    $data['activityData'] = $this->presensi_model->getKegiatan();
+    $instructorId = $this->session->userdata('instructorId');
+    $data['activityData'] = $this->presensi_model->getKegiatan($instructorId);
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 		$this->load->view('pembinaan/participant_attendance/show_activity', $data);

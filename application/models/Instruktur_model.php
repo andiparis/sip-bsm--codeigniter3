@@ -6,6 +6,15 @@ class Instruktur_model extends CI_Model {
     return $this->db->get('instruktur')->result();
 	}
 
+  public function getUserAccount() {
+    $this->db->select('*');
+    $this->db->from('instruktur');
+    $this->db->join('user', 'instruktur.id_user = user.id_user', 'right');
+    $this->db->where('user.level', '1');
+    $this->db->where('instruktur.id_user IS NULL');
+    return $this->db->get()->result();
+  }
+
   public function getById($id) {
     $this->db->where('id_instruktur', $id);
     return $this->db->get('instruktur')->row();
