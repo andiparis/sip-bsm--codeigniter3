@@ -77,7 +77,12 @@
 
                       $attendanceDateCount = count(array_unique($attendanceDates));
                       $participantNotPresent = $attendanceDateCount - $participantAttendanceCount;
-                      $attendanceParticipantPercentage = ($participantAttendanceCount / $attendanceDateCount) * 100;
+
+                      if ($participantAttendanceCount != 0) {
+                        $attendanceParticipantPercentage = ($participantAttendanceCount / $attendanceDateCount) * 100;
+                      } else {
+                        $attendanceParticipantPercentage = 0;
+                      }
                   ?>
                     <tr>
                       <td style="width: 5%;"><?= $no++ ?>.</td>

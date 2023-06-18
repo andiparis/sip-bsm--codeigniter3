@@ -20,6 +20,22 @@ class Instruktur_model extends CI_Model {
     return $this->db->get('instruktur')->row();
   }
 
+  public function makeInstructorId() {
+    $sql = 'SELECT MAX(MID(id_instruktur, 5, 2)) as id
+            FROM instruktur
+            WHERE MID(id_instruktur, 3, 2) = DATE_FORMAT(CURRENT_DATE(), "%y")';
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      $row = $query->row();
+      $increamentNo = ((int)$row->id) + 1;
+      $no = sprintf("%'.02d", $increamentNo);
+    } else {
+      $no = '01';
+    }
+    $instructorId = 'IT'.date('y').$no;
+    return $instructorId;
+  }
+
   public function add($data) {
     return $this->db->insert('instruktur', $data);
   }

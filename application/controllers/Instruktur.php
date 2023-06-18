@@ -24,11 +24,6 @@ class Instruktur extends CI_Controller {
 	public function add_data() {
 		$config = array(
 			array(
-        'field' => 'id_instruktur', 
-        'label' => 'ID Instruktur', 
-        'rules' => 'max_length[10]',
-      ),
-			array(
         'field' => 'nama', 
         'label' => 'Nama', 
         'rules' => 'max_length[50]',
@@ -63,12 +58,12 @@ class Instruktur extends CI_Controller {
 	
     $userAccount = $this->input->post('user_account');
     if ($userAccount == '') {
-      $userAccount == null;
+      $userAccount = null;
     }
 
 	 	if($this->form_validation->run()) {
 			$data = [
-				'id_instruktur' => $this->input->POST('id_instruktur'),
+				'id_instruktur' => $this->instruktur_model->makeInstructorId(),
 				'nama' => $this->input->POST('nama'),
 				'jk' => $this->input->POST('jenis_kelamin'),
 				'telp' => $this->input->POST('telp'),
@@ -125,7 +120,7 @@ class Instruktur extends CI_Controller {
 
     $userAccount = $this->input->post('user_account');
     if ($userAccount == '') {
-      $userAccount == null;
+      $userAccount = null;
     }
 
 		if($this->form_validation->run()) {

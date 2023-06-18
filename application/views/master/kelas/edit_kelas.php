@@ -38,10 +38,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kelas/edit_data/' . $kelas->id_kelas)?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Kelas *</label>
-                      <input type="text" name="id_kelas" id="id" value="<?=$kelas->id_kelas?>" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
                       <label for="nama">Nama Kelas *</label>
                       <input type="text" name="nama_kelas" id="nama" value="<?=$kelas->nama_kelas?>" class="form-control" required>
                     </div>

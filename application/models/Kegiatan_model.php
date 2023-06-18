@@ -80,19 +80,19 @@ class Kegiatan_model extends CI_Model {
 	}
 
   public function makeActivityId() {
-    $sql = 'SELECT MAX(MID(id_kegiatan, 7, 3)) as id
+    $sql = 'SELECT MAX(MID(id_kegiatan, 7, 2)) as id
             FROM pembinaan
             WHERE MID(id_kegiatan, 3, 4) = DATE_FORMAT(CURRENT_DATE(), "%y%m")';
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       $row = $query->row();
       $increamentNo = ((int)$row->id) + 1;
-      $no = sprintf("%'.03d", $increamentNo);
+      $no = sprintf("%'.02d", $increamentNo);
     } else {
-      $no = '001';
+      $no = '01';
     }
-    $requestId = 'PB'.date('ym').$no;
-    return $requestId;
+    $acitivityId = 'PB'.date('ym').$no;
+    return $acitivityId;
   }
 
   public function add($data) {

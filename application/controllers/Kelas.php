@@ -23,11 +23,6 @@ class Kelas extends CI_Controller {
 
 	public function add_data() {
 		$config = array(
-      array(
-        'field' => 'id_kelas', 
-        'label' => 'id Kelas', 
-        'rules' => 'max_length[10]',
-      ),
 			array(
         'field' => 'nama_kelas', 
         'label' => 'Nama Kelas', 
@@ -43,7 +38,7 @@ class Kelas extends CI_Controller {
 	
 	 	if($this->form_validation->run()) {
 			$data = [
-        'id_kelas' => $this->input->POST('id_kelas'),
+        'id_kelas' => $this->kelas_model->makeClassId(),
 				'nama_kelas' => $this->input->POST('nama_kelas'),
 				'kapasitas' => $this->input->POST('kapasitas'),
 			];

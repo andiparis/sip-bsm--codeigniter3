@@ -38,10 +38,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('instruktur/add_data')?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Instruktur *</label>
-                      <input type="text" name="id_instruktur" id="id" class="form-control" required autofocus>
-                    </div>
-                    <div class="form-group">
                       <label for="nama">Nama *</label>
                       <input type="text" name="nama" id="nama" class="form-control" required>
                     </div>

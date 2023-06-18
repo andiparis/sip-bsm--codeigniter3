@@ -38,10 +38,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('kelas/add_data')?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Kelas *</label>
-                      <input type="text" name="id_kelas" id="id" class="form-control" required autofocus>
-                    </div>
-                    <div class="form-group">
                       <label for="nama">Nama Kelas*</label>
                       <input type="text" name="nama_kelas" id="nama" class="form-control" required>
                     </div>

@@ -38,10 +38,6 @@
                 <div class="col-md-6">
                   <form action="<?=site_url('instruktur/edit_data/' . $instruktur->id_instruktur)?>" method="post">
                     <div class="form-group">
-                      <label for="id">ID Instruktur *</label>
-                      <input type="text" name="id_instruktur" id="id" value="<?=$instruktur->id_instruktur?>" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
                       <label for="nama">Nama *</label>
                       <input type="text" name="nama" id="nama" value="<?=$instruktur->nama?>" class="form-control" required>
                     </div>

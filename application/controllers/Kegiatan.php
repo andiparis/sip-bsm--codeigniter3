@@ -26,15 +26,10 @@ class Kegiatan extends CI_Controller {
 
 	public function add_data() {
 		$config = array(
-      array(
-        'field' => 'id_kegiatan', 
-        'label' => 'ID Kegiatan', 
-        'rules' => 'max_length[10]',
-      ),
 			array(
         'field' => 'nama_kegiatan', 
         'label' => 'Nama Kegiatan', 
-        'rules' => 'max_length[50]',
+        'rules' => 'max_length[100]',
       ),
       array(
         'field' => 'kuota_peserta', 
@@ -102,7 +97,7 @@ class Kegiatan extends CI_Controller {
 			array(
         'field' => 'nama_kegiatan', 
         'label' => 'Nama Kegiatan', 
-        'rules' => 'max_length[50]',
+        'rules' => 'max_length[100]',
       ),
       array(
         'field' => 'kuota_peserta', 
