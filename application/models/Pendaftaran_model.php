@@ -9,10 +9,6 @@ class Pendaftaran_model extends CI_Model {
             LEFT JOIN `peserta` 
             ON `peserta_pembinaan`.`id_peserta` = `peserta`.`id_peserta`;";
     $query = $this->db->query($sql);
-    // $this->db->select('*');
-    // $this->db->from('pembinaan');
-    // $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
-    // $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
     return $query->result();
 	}
 

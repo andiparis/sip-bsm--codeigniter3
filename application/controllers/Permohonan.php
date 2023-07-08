@@ -1,4 +1,13 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property input $input
+ *  @property upload $upload
+ *  @property session $session
+ *  @property form_validation $form_validation
+ *  @property permohonan_model $permohonan_model
+ */
 
 class Permohonan extends CI_Controller {
 

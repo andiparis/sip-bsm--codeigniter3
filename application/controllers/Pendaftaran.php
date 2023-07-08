@@ -1,4 +1,12 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property input $input
+ *  @property session $session
+ *  @property form_validation $form_validation
+ *  @property pendaftaran_model $pendaftaran_model
+ */
 
 class Pendaftaran extends CI_Controller {
 
@@ -9,7 +17,6 @@ class Pendaftaran extends CI_Controller {
   
 	public function index() {
     $data['data'] = $this->pendaftaran_model->getKegiatan();
-    // $data['id_peserta'] = $this->pendaftaran_model->makeIdPeserta();
     $this->load->view('templates/header_user');
 		$this->load->view('pembinaan/pendaftaran/pendaftaran', $data);
     $this->load->view('templates/footer_user');

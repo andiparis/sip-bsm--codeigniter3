@@ -71,7 +71,6 @@ class Jadwal_Instruktur_model extends CI_Model {
     $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
     $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
     $this->db->where('pembinaan.id_kegiatan', $id);
-    // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
     return $this->db->get()->result();
 	}
 

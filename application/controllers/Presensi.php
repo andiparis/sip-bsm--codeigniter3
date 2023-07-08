@@ -1,4 +1,12 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property input $input
+ *  @property session $session
+ *  @property form_validation $form_validation
+ *  @property presensi_model $presensi_model
+ */
 
 class Presensi extends CI_Controller {
 
@@ -19,14 +27,6 @@ class Presensi extends CI_Controller {
 		$this->load->view('pembinaan/participant_attendance/show_activity', $data);
 		$this->load->view('templates/footer');
   }
-
-  // public function selectActivity($activityId) {
-  //   $data['activityParticipant'] = $this->presensi_model->getParticipantByActivityId($activityId);
-  //   $this->load->view('templates/header');
-	// 	$this->load->view('templates/menu');
-	// 	$this->load->view('pembinaan/participant_attendance/add_attendance', $data);
-	// 	$this->load->view('templates/footer');
-  // }
 
   public function addAttendance($activityId) {
     $config = array(

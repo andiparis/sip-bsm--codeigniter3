@@ -20,8 +20,7 @@ class Laporan_Presensi_model extends CI_Model {
             AND (peserta.status IS NULL OR peserta.status NOT IN ('0', '2'));";
     return $this->db->query($sql)->result();
   }
-
-  // public function getAll() {
+  
   public function getParticipantAttendance($id) {
     $sql = "SELECT * FROM pembinaan
             JOIN peserta_pembinaan ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan

@@ -1,4 +1,10 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property session $session
+ *  @property jadwal_instruktur_model $jadwal_instruktur_model
+ */
 
 class Jadwal_Instruktur extends CI_Controller {
 

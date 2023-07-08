@@ -1,4 +1,12 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property input $input
+ *  @property session $session
+ *  @property form_validation $form_validation
+ *  @property kelas_model $kelas_model
+ */
 
 class Kelas extends CI_Controller {
 
@@ -9,8 +17,6 @@ class Kelas extends CI_Controller {
 		if($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
-
-    // Variabel config dipindah ke sini
 	}
   
 	public function index() {

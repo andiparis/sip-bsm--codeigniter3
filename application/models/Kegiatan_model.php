@@ -10,17 +10,12 @@ class Kegiatan_model extends CI_Model {
 	}
 
   public function getDetailKegiatan() {
-    $sql = "SELECT * FROM `peserta_pembinaan` 
-            RIGHT JOIN `pembinaan` 
-            ON `pembinaan`.`id_kegiatan` = `peserta_pembinaan`.`id_kegiatan` 
-            LEFT JOIN `peserta` 
-            ON `peserta_pembinaan`.`id_peserta` = `peserta`.`id_peserta`;";
+    $sql = "SELECT * FROM peserta_pembinaan 
+            RIGHT JOIN pembinaan 
+            ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
+            LEFT JOIN peserta 
+            ON peserta_pembinaan.id_peserta = peserta.id_peserta;";
     $query = $this->db->query($sql);
-    // $this->db->select('*');
-    // $this->db->from('pembinaan');
-    // $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
-    // $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
-    // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
     return $query->result();
 	}
 
@@ -75,7 +70,6 @@ class Kegiatan_model extends CI_Model {
     $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
     $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
     $this->db->where('pembinaan.id_kegiatan', $id);
-    // $this->db->join('presensi', 'peserta_pembinaan.id_peserta_pembinaan = presensi.id_peserta_pembinaan');
     return $this->db->get()->result();
 	}
 

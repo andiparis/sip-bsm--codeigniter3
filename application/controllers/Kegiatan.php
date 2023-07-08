@@ -1,4 +1,12 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property input $input
+ *  @property session $session
+ *  @property form_validation $form_validation
+ *  @property kegiatan_model $kegiatan_model
+ */
 
 class Kegiatan extends CI_Controller {
 
@@ -9,15 +17,11 @@ class Kegiatan extends CI_Controller {
 		if($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
-
-    // Variabel config dipindah ke sini
 	}
   
 	public function index() {
 		$data['data'] = $this->kegiatan_model->getAll();
     $data['activityDetailData'] = $this->kegiatan_model->getDetailKegiatan();
-    // $data['data_instruktur_2'] = $this->kegiatan_model->getInstruktur2();
-    // $data['data_kelas'] = $this->kegiatan_model->getKelas();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 		$this->load->view('pembinaan/kegiatan/show_kegiatan', $data);
@@ -180,32 +184,6 @@ class Kegiatan extends CI_Controller {
       'status' => '1',
     ];
     $this->kegiatan_model->changeStatus($id, $data);
-
-    // $detailKegiatan = $this->kegiatan_model->getDetailKegiatan();
-    // foreach($detailKegiatan as $kegiatan) {
-    //   if($id == $kegiatan->id_peserta) {
-    //     $idKegiatan = $kegiatan->id_kegiatan;
-    //     $tglMulai = $kegiatan->tgl_mulai;
-    //     $tglBerakhir = $kegiatan->tgl_berakhir;
-    //     $idPesertaPembinaan = $kegiatan->id_peserta_pembinaan;
-    //   }
-    // }
-
-    // $dateInterval = new DatePeriod(
-    //   new DateTime($tglMulai),
-    //   new DateInterval('P1D'),
-    //   new DateTime($tglBerakhir . '+ 1 day'),
-    // );
-
-    // foreach($dateInterval as $data) {
-    //   $presensiData = [
-    //     'id_presensi' => $this->presensi_model->makeIdPresensi(),
-    //     'tgl' => $data->format('Y-m-d'),
-    //     'status_kehadiran' => null,
-    //     'id_peserta_pembinaan' => $idPesertaPembinaan,
-    //   ];
-    //   $this->presensi_model->add($presensiData);
-    // }
     redirect('kegiatan/detail_data/' . $activityId);
 	}
 

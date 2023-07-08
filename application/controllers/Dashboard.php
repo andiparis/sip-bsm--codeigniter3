@@ -1,4 +1,9 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property session $session
+ */
 
 class Dashboard extends CI_Controller {
 

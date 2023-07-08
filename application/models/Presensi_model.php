@@ -31,16 +31,6 @@ class Presensi_model extends CI_Model {
     return $this->db->query($sql)->result();
 	}
 
-  // public function getDetailKegiatan() {
-  //   $sql = "SELECT * FROM peserta_pembinaan
-  //           RIGHT JOIN pembinaan
-  //           ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan
-  //           LEFT JOIN peserta
-  //           ON peserta_pembinaan.id_peserta = peserta.id_peserta;";
-  //   $query = $this->db->query($sql);
-  //   return $query->result();
-	// }
-
   public function makeIdPresensi() {
     $sql = 'SELECT MAX(MID(id_presensi, 7, 5)) as id
             FROM presensi

@@ -1,4 +1,10 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/** 
+ *  @property session $session
+ *  @property laporan_permohonan_model $laporan_permohonan_model
+ */
 
 class Laporan_Permohonan extends CI_Controller {
 
