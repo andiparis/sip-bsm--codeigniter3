@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="<?=site_url('dashboard')?>" class="brand-link">
-    <img src="<?=base_url()?>assets/dist/img/logo.png" alt="SIP-BSM Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="<?=base_url()?>assets/dist/img/bsm-logo.png" alt="SIP-BSM Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">SIP-BSM</span>
   </a>
 
@@ -40,9 +40,17 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' ? 'menu-open' : null?>">
-            <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' ? 'active' : null?>">
-              <i class="nav-icon fas fa-file"></i>
+          <li class="nav-item">
+            <a href="<?=site_url('laporan_permohonan')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_permohonan' ? 'active' : null?>">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>
+                Permohonan Workshop
+              </p>
+            </a>
+          </li>
+          <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' ? 'menu-open' : null?>">
+            <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' ? 'active' : null?>">
+              <i class="nav-icon fas fa-chalkboard"></i>
               <p>
                 Kegiatan Pembinaan
                 <i class="right fas fa-angle-left"></i>
@@ -57,14 +65,6 @@
                   </p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="<?=site_url('laporan_peserta')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_peserta' ? 'active' : null?>">
-                  <i class="nav-icon far fa-circle"></i>
-                  <p>
-                    Laporan Peserta
-                  </p>
-                </a>
-              </li> -->
               <li class="nav-item">
                 <a href="<?=site_url('laporan_presensi')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_presensi' ? 'active' : null?>">
                   <i class="nav-icon far fa-circle"></i>
@@ -73,22 +73,11 @@
                   </p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item <?=$this->uri->segment(1) == 'permohonan' || $this->uri->segment(1) == 'jadwal' ? 'menu-open' : null?>">
-            <a href="#" class="nav-link <?=$this->uri->segment(1) == 'permohonan' || $this->uri->segment(1) == 'jadwal' ? 'active' : null?>">
-              <i class="nav-icon fas fa-folder"></i>
-              <p>
-                Permohonan Workshop
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=site_url('laporan_permohonan')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_permohonan' ? 'active' : null?>">
+                <a href="<?=site_url('cetak_sertifikat')?>" class="nav-link <?=$this->uri->segment(1) == 'cetak_sertifikat' ? 'active' : null?>">
                   <i class="nav-icon far fa-circle"></i>
                   <p>
-                    Laporan Permohonan
+                    Cetak Sertifikat
                   </p>
                 </a>
               </li>

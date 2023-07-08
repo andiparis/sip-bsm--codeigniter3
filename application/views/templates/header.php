@@ -31,11 +31,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-user"></i>
-        </a>
-      </li> -->
       <!-- User account -->
       <li class="nav-item dropdown user user-menu">
         <a href="#" class="nav-link" data-toggle="dropdown">
