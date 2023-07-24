@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
             <li class="breadcrumb-item active">Rekapitulasi Presensi</li>
           </ol>
@@ -27,7 +27,7 @@
             <div class="card-header">
               <h3 class="card-title"><b>Data Presensi Peserta Pembinaan</b></h3>
               <div class="float-sm-right">
-                <a href="<?=site_url('laporan_presensi')?>" class="btn btn-warning">
+                <a href="<?= site_url('laporan_presensi') ?>" class="btn btn-warning">
                   <b style="color: white"><i class="fas fa-undo"></i> Back</b>
                 </a>
               </div>
@@ -45,6 +45,7 @@
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
                     $participantAttendanceMap = array();
@@ -84,6 +85,7 @@
                         $attendanceParticipantPercentage = 0;
                       }
                   ?>
+
                     <tr>
                       <td style="width: 5%;"><?= $no++ ?>.</td>
                       <td><?= $participantName ?></td>
@@ -91,7 +93,9 @@
                       <td style="width: 10%;"><?= $participantNotPresent ?></td>
                       <td style="width: 10%;"><?= $attendanceParticipantPercentage . '%' ?></td>
                     </tr>
+
                   <?php } ?>
+                  
                 </tbody>
               </table>
             </div>

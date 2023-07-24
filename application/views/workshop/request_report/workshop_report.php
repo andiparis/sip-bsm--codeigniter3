@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Permohonan Workshop</li>
             <li class="breadcrumb-item active">Laporan Permohonan</li>
           </ol>
@@ -45,9 +45,10 @@
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
-                    foreach($workshopRequest as $request) { 
+                    foreach ($workshopRequest as $request) { 
                       $requestId = $request->id_permohonan;
                       $requestDate = $request->tgl_permohonan;
                       $nameOfRequester = $request->nama_pemohon;
@@ -71,6 +72,7 @@
                       else
                         $requestStatus = 'Ditolak';
                   ?>
+
                     <tr>
                       <td style="width: 5%;"><?= $no++ ?>.</td>
                       <td><?= $requestDate ?></td>
@@ -85,16 +87,18 @@
                       <td><?= $requestStatus ?></td>
                       <td class="text-center" width="150px">
                         <?php if ($status == '0') { ?>
-                          <a href="<?=site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-xs">
+                          <a href="<?= site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-xs">
                             <b>Setujui</b>
                           </a>
-                          <a href="<?=site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-xs">
+                          <a href="<?= site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-xs">
                             <b>Tolak</b>
                           </a>
                         <?php } ?>
                       </td>
                     </tr>
+
                   <?php } ?>
+
                 </tbody>
               </table>
             </div>

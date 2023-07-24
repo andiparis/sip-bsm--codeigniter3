@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
             <li class="breadcrumb-item active">Kelola Jadwal Kegiatan</li>
           </ol>
@@ -27,7 +27,7 @@
             <div class="card-header">
               <h3 class="card-title"><b>Data Jadwal Kegiatan Pembinaan</b></h3>
               <div class="float-sm-right">
-                <a href="<?=site_url('kegiatan/add_data')?>" class="btn btn-primary">
+                <a href="<?= site_url('kegiatan/add_data') ?>" class="btn btn-primary">
                   <b><i class="fas fa-plus"></i> Add</b>
                 </a>
               </div>
@@ -48,12 +48,13 @@
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
                     $activityDetailMap = array();
-                    foreach($activityDetailData as $activityDetail) { 
+                    foreach ($activityDetailData as $activityDetail) { 
                       $idKegiatan = $activityDetail->id_kegiatan;
-                      if(!array_key_exists($idKegiatan, $activityDetailMap)) {
+                      if (!array_key_exists($idKegiatan, $activityDetailMap)) {
                         $activityDetailMap[$idKegiatan] = array(
                           'duplicateCount' => 0,
                           'waitingParticipant' => 0,
@@ -67,14 +68,14 @@
                         );
                       }
                       $activityDetailMap[$idKegiatan]['duplicateCount']++;
-                      if($activityDetail->status == '0') {
+                      if ($activityDetail->status == '0') {
                         $activityDetailMap[$idKegiatan]['waitingParticipant']++;
-                      } else if($activityDetail->status == '1') {
+                      } else if ($activityDetail->status == '1') {
                         $activityDetailMap[$idKegiatan]['acceptedParticipant']++;
                       }
                     }
 
-                    foreach($activityDetailMap as $idKegiatan => $activityDetail) {
+                    foreach ($activityDetailMap as $idKegiatan => $activityDetail) {
                       $activityId = $activityDetail['activityId'];
                       $activityCategory = $activityDetail['activityCategory'];
                       $activityName = $activityDetail['activityName'];
@@ -85,14 +86,15 @@
                       $acceptedParticipant = $activityDetail['acceptedParticipant'];
                       $duplicateCount = $activityDetail['duplicateCount'];
 
-                      if($activityCategory == '1') {
+                      if ($activityCategory == '1') {
                         $category = 'Magang';
-                      } else if($activityCategory == '2') {
+                      } else if ($activityCategory == '2') {
                         $category = 'Pelatihan';
                       } else {
                         $category = 'Workshop';
                       }                   
                   ?>
+
                     <tr>
                       <td style="width: 5%;"><?= $no++ ?>.</td>
                       <td><?= $category ?></td>
@@ -118,7 +120,9 @@
                         </a>
                       </td>
                     </tr>
+
                   <?php } ?>
+                  
                 </tbody>
               </table>
             </div>
