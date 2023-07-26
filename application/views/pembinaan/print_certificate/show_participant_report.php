@@ -58,6 +58,7 @@
                         $participantAttendanceMap[$participantId] = array(
                           'attendanceDates' => array(),
                           'participantAttendance' => 0,
+                          'participantId' => $participantId,
                           'participantName' => $participant->nama,
                           'phoneNumber' => $participant->telp,
                           'email' => $participant->email,
@@ -75,6 +76,7 @@
                     }
 
                     foreach ($participantAttendanceMap as $participantAttendance) {
+                      $participantId = $participantAttendance['participantId'];
                       $participantName = $participantAttendance['participantName'];
                       $phoneNumber = $participantAttendance['phoneNumber'];
                       $email = $participantAttendance['email'];
@@ -104,7 +106,7 @@
                       <td style="width: 10%;">
 
                       <?php if ($attendanceParticipantPercentage >= 75) { ?>
-                        <a href="<?=site_url('')?>" class="btn btn-primary btn-xs">
+                        <a href="<?=site_url('cetak_sertifikat/printCertificate/' . $participantId)?>" class="btn btn-primary btn-xs">
                           <b><i class="fas fa-download"></i> Download</b>
                         </a>
                       <?php } ?>
