@@ -18,6 +18,70 @@
   </div>
   <!-- /.content-header -->
 
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3><?= $instructor ?></h3>
+              <p>Instruktur</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <a href="<?= site_url('instruktur') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3><?= $activity ?></h3>
+              <p>Kegiatan Pembinaan</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-chalkboard"></i>
+            </div>
+            <a href="<?= site_url('kegiatan') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3><?= $participant ?></h3>
+              <p>Peserta Pembinaan</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <a href="<?= site_url('kegiatan') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3><?= $workshop ?></h3>
+              <p>Permohonan Workshop</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-file-signature"></i>
+            </div>
+            <a href="<?= site_url('kegiatan') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+    </div>
+  </section>
 </div>
 <!-- /.content-wrapper -->
 

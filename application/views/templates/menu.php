@@ -26,7 +26,7 @@
           </li>
           <li class="nav-item">
             <a href="<?=site_url('instruktur')?>" class="nav-link <?=$this->uri->segment(1) == 'instruktur' ? 'active' : null?>">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
                 Kelola Instruktur
               </p>
