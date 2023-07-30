@@ -3,14 +3,20 @@
 class Pendaftaran_model extends CI_Model {
 
   public function getKegiatan() {
-    $sql = "SELECT * FROM `peserta_pembinaan` 
-            RIGHT JOIN `pembinaan` 
-            ON `pembinaan`.`id_kegiatan` = `peserta_pembinaan`.`id_kegiatan` 
-            LEFT JOIN `peserta` 
-            ON `peserta_pembinaan`.`id_peserta` = `peserta`.`id_peserta`;";
+    $sql = "SELECT * FROM peserta_pembinaan
+            RIGHT JOIN pembinaan ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan
+            LEFT JOIN peserta ON peserta_pembinaan.id_peserta = peserta.id_peserta
+            WHERE pembinaan.kategori IN (1, 2)
+            AND CURDATE() <pembinaan.tgl_mulai";
     $query = $this->db->query($sql);
     return $query->result();
 	}
+
+  public function getActivityById($activityId) {
+    $this->db->from('pembinaan');
+    $this->db->where('id_kegiatan', $activityId);
+    return $this->db->get()->row();
+  }
 
   public function makeIdPeserta() {
     $sql = 'SELECT MAX(MID(id_peserta, 7, 4)) as id
