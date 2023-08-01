@@ -9,12 +9,13 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Kelola Instruktur</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -26,7 +27,7 @@
             <div class="card-header">
               <h3 class="card-title"><b>Data Instruktur</b></h3>
               <div class="float-sm-right">
-                <a href="<?=site_url('instruktur/add_data')?>" class="btn btn-primary">
+                <a href="<?= site_url('instruktur/add_data') ?>" class="btn btn-primary">
                   <b><i class="fas fa-plus"></i> Add</b>
                 </a>
               </div>
@@ -44,7 +45,7 @@
                     <th>Alamat</th>
                     <th>Keahlian</th>
                     <th>Status Akun</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -62,8 +63,10 @@
 
                       if ($accountStatus != null) {
                         $accountStatus = 'Terhubung';
+                        $style = "success";
                       } else {
                         $accountStatus = 'Tidak Terhubung';
+                        $style = "warning";
                       }
                   ?>
 
@@ -75,12 +78,12 @@
                       <td><?= $instruktur->email ?></td>
                       <td><?= $instruktur->alamat ?></td>
                       <td><?= $instruktur->keahlian ?></td>
-                      <td><?= $accountStatus ?></td>
+                      <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $accountStatus ?></span></td>
                       <td class="text-center" width="150px">
-                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-xs" style="color: white;">
+                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-sm" style="color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-xs">
+                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>
@@ -104,3 +107,41 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Konfirmasi Hapus Data</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah Anda yakin ingin menghapus data ini?</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+        <button type="button" class="btn btn-danger" onclick="deleteData()">Ya</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script>
+  function deleteData() {
+    $.ajax({
+      url: '<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>',
+      type: 'GET',
+      success: function(response) {
+        window.location.href = '<?= site_url('instruktur') ?>';
+      },
+      error: function(error) {
+        toastr.error('Terjadi kesalahan saat menghapus data.');
+      }
+    });
+  }
+</script>

@@ -3,6 +3,7 @@
 class Instruktur_model extends CI_Model {
 
   public function getAll() {
+    $this->db->order_by('keahlian', 'ASC');
     return $this->db->get('instruktur')->result();
 	}
 

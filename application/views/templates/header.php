@@ -8,15 +8,17 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/toastr/toastr.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url()?>assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -35,11 +37,11 @@
       <li class="nav-item dropdown user user-menu">
         <a href="#" class="nav-link" data-toggle="dropdown">
           <span class="username" style="margin-right: 7px;"><?php echo ucfirst($this->session->userdata('name')); ?></span>
-          <img src="<?=base_url()?>assets/dist/img/user.png" class="user-image" alt="User Image">
+          <img src="<?= base_url() ?>assets/dist/img/user.png" class="user-image" alt="User Image">
         </a>
         <ul class="dropdown-menu">
           <li class="user-header">
-            <img src="<?=base_url()?>assets/dist/img/user.png" class="img-circle">
+            <img src="<?= base_url() ?>assets/dist/img/user.png" class="img-circle">
             <p><?php echo ucfirst($this->session->userdata('fullName')); ?></p>
           </li>
           <li class="user-footer">

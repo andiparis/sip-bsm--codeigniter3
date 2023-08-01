@@ -9,12 +9,13 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Kelola Instruktur</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -24,10 +25,10 @@
         <div class="col-12">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><b>Add Instruktur</b></h3>
+              <h3 class="card-title"><b>Tambah Instruktur</b></h3>
               <div class="float-sm-right">
-                <a href="<?=site_url('instruktur')?>" class="btn btn-warning">
-                  <b style="color: white"><i class="fas fa-undo"></i> Back</b>
+                <a href="<?= site_url('instruktur') ?>" class="btn btn-warning">
+                  <b style="color: white"><i class="fas fa-chevron-left"></i> Back</b>
                 </a>
               </div>
             </div>
@@ -36,10 +37,11 @@
               <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                  <form action="<?=site_url('instruktur/add_data')?>" method="post">
+                  <form action="<?= site_url('instruktur/add_data') ?>" method="post">
                     <div class="form-group">
                       <label for="nama">Nama *</label>
-                      <input type="text" name="nama" id="nama" class="form-control" required>
+                      <input type="text" name="nama" id="nama" class="form-control <?= form_error('nama') ? 'is-invalid' : ''; ?>">
+                      <div class="invalid-feedback"><?= form_error('nama'); ?></div>
                     </div>
                     <div class="form-group">
                       <label>Jenis Kelamin *</label><br>
@@ -54,35 +56,39 @@
                     </div>
                     <div class="form-group">
                       <label for="telp">No. Telp *</label>
-                      <input type="text" name="telp" id="telp" class="form-control" required>
+                      <input type="text" name="telp" id="telp" class="form-control <?= form_error('telp') ? 'is-invalid' : ''; ?>">
+                      <div class="invalid-feedback"><?= form_error('telp'); ?></div>
                     </div>
                     <div class="form-group">
                       <label for="email">Email *</label>
-                      <input type="email" name="email" id="email" class="form-control" required>
+                      <input type="email" name="email" id="email" class="form-control <?= form_error('email') ? 'is-invalid' : ''; ?>">
+                      <div class="invalid-feedback"><?= form_error('email'); ?></div>
                     </div>
                     <div class="form-group">
                       <label for="alamat">Alamat *</label>
-                      <textarea name="alamat" id="alamat" rows="3" class="form-control" required></textarea>
+                      <textarea name="alamat" id="alamat" rows="3" class="form-control <?= form_error('alamat') ? 'is-invalid' : ''; ?>"></textarea>
+                      <div class="invalid-feedback"><?= form_error('alamat'); ?></div>
                     </div>
                     <div class="form-group">
                       <label for="keahlian">Keahlian *</label>
-                      <input type="text" name="keahlian" id="keahlian" class="form-control" required>
+                      <input type="text" name="keahlian" id="keahlian" class="form-control <?= form_error('keahlian') ? 'is-invalid' : ''; ?>">
+                      <div class="invalid-feedback"><?= form_error('keahlian'); ?></div>
                     </div>
                     <div class="form-group">
                       <label for="account">Akun User</label>
                       <select name="user_account" id="account" class="custom-select">
                         <option value=""> - Pilih - </option>
-                        <?php foreach($userAccount as $account) { ?>
-                          <option value="<?=$account->id_user?>"><?=$account->nama?></option>
+                        <?php foreach ($userAccount as $account) { ?>
+                          <option value="<?= $account->id_user ?>"><?= $account->nama ?></option>
                         <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">
+                      <button type="reset" class="btn btn-secondary" style="margin-right: 5px;">
+                        <b><i class="fas fa-undo"> Reset</i></b>
+                      </button>
                       <button type="submit" class="btn btn-success">
                         <b><i class="fas fa-paper-plane"> Save</i></b>
-                      </button>
-                      <button type="reset" class="btn btn-secondary">
-                        <b>Reset</b>
                       </button>
                     </div>
                   </form>
