@@ -12,7 +12,7 @@ class Laporan_Permohonan extends CI_Controller {
 		parent::__construct();
     $this->load->model('laporan_permohonan_model');
 	
-		if($this->session->userdata('status') != "login") {
+		if ($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
 	}
@@ -30,6 +30,7 @@ class Laporan_Permohonan extends CI_Controller {
       'status_permohonan' => '1',
     ];
     $this->laporan_permohonan_model->changeRequestStatus($requestId, $data);
+    $this->session->set_flashdata('success_message', 'Permohonan workshop telah disetujui.');
     redirect('laporan_permohonan');
   }
 
@@ -38,6 +39,7 @@ class Laporan_Permohonan extends CI_Controller {
       'status_permohonan' => '2',
     ];
     $this->laporan_permohonan_model->changeRequestStatus($requestId, $data);
+    $this->session->set_flashdata('success_message', 'Permohonan workshop telah ditolak.');
     redirect('laporan_permohonan');
   }
 }

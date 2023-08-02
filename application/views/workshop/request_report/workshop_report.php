@@ -11,11 +11,11 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Permohonan Workshop</li>
-            <li class="breadcrumb-item active">Laporan Permohonan</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -41,7 +41,7 @@
                     <th>Surat Kegiatan</th>
                     <th>Keterangan</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,12 +65,16 @@
                         $note = $note;
                       }
 
-                      if ($status == '0')
+                      if ($status == '0') {
                         $requestStatus = 'Menunggu';
-                      else if ($status == '1')
+                        $style = 'warning';
+                      } else if ($status == '1') {
                         $requestStatus = 'Disetujui';
-                      else
+                        $style = 'success';
+                      } else {
                         $requestStatus = 'Ditolak';
+                        $style = 'danger';
+                      }
                   ?>
 
                     <tr>
@@ -84,13 +88,13 @@
                         <a href="<?= base_url('uploads/activity_letter/') . $activityLetter ?>" target="_blank"><?= $activityLetter ?></a>
                       </td>
                       <td><?= $note ?></td>
-                      <td><?= $requestStatus ?></td>
+                      <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $requestStatus ?></span></td>
                       <td class="text-center" width="150px">
                         <?php if ($status == '0') { ?>
-                          <a href="<?= site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-xs">
+                          <a href="<?= site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-sm" style="margin-bottom: 5px">
                             <b>Setujui</b>
                           </a>
-                          <a href="<?= site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-xs">
+                          <a href="<?= site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 5px">
                             <b>Tolak</b>
                           </a>
                         <?php } ?>
