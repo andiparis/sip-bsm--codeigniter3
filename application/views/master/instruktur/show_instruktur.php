@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Kelola Instruktur</b></h1>
+          <h1><b>Kelola</b> Instruktur</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -63,10 +63,10 @@
 
                       if ($accountStatus != null) {
                         $accountStatus = 'Terhubung';
-                        $style = "success";
+                        $style = 'success';
                       } else {
                         $accountStatus = 'Tidak Terhubung';
-                        $style = "warning";
+                        $style = 'warning';
                       }
                   ?>
 
@@ -80,10 +80,10 @@
                       <td><?= $instruktur->keahlian ?></td>
                       <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $accountStatus ?></span></td>
                       <td class="text-center" width="150px">
-                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-sm" style="color: white;">
+                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-sm" style="margin-bottom: 5px; color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 5px;" onclick="return confirmDelete();">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>
@@ -108,40 +108,13 @@
 </div>
 <!-- /.content-wrapper -->
 
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Konfirmasi Hapus Data</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Apakah Anda yakin ingin menghapus data ini?</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-        <button type="button" class="btn btn-danger" onclick="deleteData()">Ya</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
 <script>
-  function deleteData() {
-    $.ajax({
-      url: '<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>',
-      type: 'GET',
-      success: function(response) {
-        window.location.href = '<?= site_url('instruktur') ?>';
-      },
-      error: function(error) {
-        toastr.error('Terjadi kesalahan saat menghapus data.');
-      }
-    });
+  function confirmDelete() {
+    var result = confirm("Apakah Anda yakin ingin menghapus data ini?");
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
   }
 </script>

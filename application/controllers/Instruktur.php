@@ -157,5 +157,6 @@ class Instruktur extends CI_Controller {
 	public function delete_data($id) {
 		$this->instruktur_model->delete($id);
     $this->session->set_flashdata('success_message', 'Data instruktur berhasil dihapus.');
+    redirect('instruktur');
 	}
 }
