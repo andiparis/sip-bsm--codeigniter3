@@ -53,10 +53,10 @@ class Auth extends CI_Controller {
       );
 
       $this->auth_model->registerUser($data);
+      $this->session->set_flashdata('success_message', 'Akun instruktur berhasil ditambahkan.');
       redirect('auth');
     } else {
-      $data['errors'] = validation_errors();
-      $this->load->view('master/register', $data);
+      $this->load->view('master/register');
     }
   }
   
@@ -80,6 +80,7 @@ class Auth extends CI_Controller {
 				'status' => 'login',
 			);
 			$this->session->set_userdata($session_data);
+      $this->session->set_flashdata('success_message', 'Proses sign in berhasil. Selamat menggunakan sistem.');
 
       if ($session_data['userLevel'] == '0') {
 			  redirect('dashboard');
@@ -87,7 +88,7 @@ class Auth extends CI_Controller {
         redirect('jadwal_instruktur');
       }
 		} else {
-      $this->session->set_flashdata('error', 'Sign in failed. Invalid username or password.');
+      $this->session->set_flashdata('warning_message', 'Proses sign in gagal. Cek username atau password.');
 			redirect('auth');
 		}
   }
