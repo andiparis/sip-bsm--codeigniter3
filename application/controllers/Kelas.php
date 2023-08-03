@@ -14,7 +14,7 @@ class Kelas extends CI_Controller {
 		parent::__construct();
     $this->load->model('kelas_model');
 	
-		if($this->session->userdata('status') != "login") {
+		if ($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
 	}
@@ -32,23 +32,24 @@ class Kelas extends CI_Controller {
 			array(
         'field' => 'nama_kelas', 
         'label' => 'Nama Kelas', 
-        'rules' => 'max_length[50]',
+        'rules' => 'required|max_length[50]',
       ),
 			array(
         'field' => 'kapasitas', 
         'label' => 'Kapasitas', 
-        'rules' => 'max_length[3]|numeric',
+        'rules' => 'required|numeric|max_length[3]',
       ),
 		);
 		$this->form_validation->set_rules($config);	
 	
-	 	if($this->form_validation->run()) {
+	 	if ($this->form_validation->run()) {
 			$data = [
         'id_kelas' => $this->kelas_model->makeClassId(),
 				'nama_kelas' => $this->input->POST('nama_kelas'),
 				'kapasitas' => $this->input->POST('kapasitas'),
 			];
 			$this->kelas_model->add($data);
+      $this->session->set_flashdata('success_message', 'Data kelas berhasil ditambahkan.');
 			redirect('kelas');
 		} else {
 			$this->load->view('templates/header');
@@ -63,22 +64,23 @@ class Kelas extends CI_Controller {
 			array(
         'field' => 'nama_kelas', 
         'label' => 'Nama Kelas', 
-        'rules' => 'max_length[50]',
+        'rules' => 'required|max_length[50]',
       ),
 			array(
         'field' => 'kapasitas', 
         'label' => 'Kapasitas', 
-        'rules' => 'max_length[3]|numeric',
+        'rules' => 'required|numeric|max_length[3]',
       ),
 		);
 		$this->form_validation->set_rules($config);
 
-		if($this->form_validation->run()) {
+		if ($this->form_validation->run()) {
 			$data = [
 				'nama_kelas' => $this->input->POST('nama_kelas'),
 				'kapasitas' => $this->input->POST('kapasitas'),
 			];
 			$this->kelas_model->edit($id, $data);
+      $this->session->set_flashdata('success_message', 'Data kelas berhasil dirubah.');
 			redirect('kelas');
 		} else {
 			$data['kelas'] = $this->kelas_model->getById($id);
@@ -91,6 +93,7 @@ class Kelas extends CI_Controller {
 
 	public function delete_data($id) {
 		$this->kelas_model->delete($id);
-		redirect('kelas');
+    $this->session->set_flashdata('success_message', 'Data kelas berhasil dihapus.');
+    redirect('kelas');
 	}
 }

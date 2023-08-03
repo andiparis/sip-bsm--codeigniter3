@@ -3,6 +3,7 @@
 class Kelas_model extends CI_Model {
 
   public function getAll() {
+    $this->db->order_by('nama_kelas', 'ASC');
     return $this->db->get('kelas')->result();
 	}
 
