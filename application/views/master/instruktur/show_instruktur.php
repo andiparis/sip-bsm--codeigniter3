@@ -80,10 +80,10 @@
                       <td><?= $instruktur->keahlian ?></td>
                       <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $accountStatus ?></span></td>
                       <td class="text-center" width="150px">
-                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-sm" style="margin-bottom: 5px; color: white;">
+                        <a href="<?= site_url('instruktur/edit_data/' . $instruktur->id_instruktur) ?>" class="btn btn-warning btn-sm" style="margin-bottom: 3px; color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 5px;" onclick="return confirmDelete();">
+                        <a href="<?= site_url('instruktur/delete_data/' . $instruktur->id_instruktur) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px;" onclick="return confirmDelete();">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>
