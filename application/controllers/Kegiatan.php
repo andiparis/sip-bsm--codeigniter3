@@ -14,13 +14,13 @@ class Kegiatan extends CI_Controller {
 		parent::__construct();
     $this->load->model('kegiatan_model');
 	
-		if($this->session->userdata('status') != "login") {
+		if ($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
 	}
   
 	public function index() {
-		$data['data'] = $this->kegiatan_model->getAll();
+		$data['data'] = $this->kegiatan_model->getAll(); // This code is probably unused
     $data['activityDetailData'] = $this->kegiatan_model->getDetailKegiatan();
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
@@ -33,12 +33,32 @@ class Kegiatan extends CI_Controller {
 			array(
         'field' => 'nama_kegiatan', 
         'label' => 'Nama Kegiatan', 
-        'rules' => 'max_length[100]',
+        'rules' => 'required|max_length[100]',
+      ),
+      array(
+        'field' => 'kategori_kegiatan', 
+        'label' => 'Kategori Kegiatan', 
+        'rules' => 'required',
+      ),
+      array(
+        'field' => 'tgl_mulai', 
+        'label' => 'Tanggal Mulai', 
+        'rules' => 'required|callback_check_date_range',
+      ),
+      array(
+        'field' => 'tgl_berakhir', 
+        'label' => 'Tanggal Berakhir', 
+        'rules' => 'required',
       ),
       array(
         'field' => 'kuota_peserta', 
         'label' => 'Kuota Peserta', 
         'rules' => 'numeric',
+      ),
+      array(
+        'field' => 'id_instruktur_1', 
+        'label' => 'Instruktur 1', 
+        'rules' => 'required|callback_check_instruktur',
       ),
 			array(
         'field' => 'keterangan', 
@@ -84,6 +104,7 @@ class Kegiatan extends CI_Controller {
 				'keterangan' => $this->input->POST('keterangan'),
 			];
 			$this->kegiatan_model->add($data);
+      $this->session->set_flashdata('success_message', 'Data jadwal kegiatan pembinaan berhasil ditambahkan.');
 			redirect('kegiatan');
 		} else {
       $data['data_permohonan'] = $this->kegiatan_model->getWorkshopRequest();
@@ -101,12 +122,32 @@ class Kegiatan extends CI_Controller {
 			array(
         'field' => 'nama_kegiatan', 
         'label' => 'Nama Kegiatan', 
-        'rules' => 'max_length[100]',
+        'rules' => 'required|max_length[100]',
+      ),
+      array(
+        'field' => 'kategori_kegiatan', 
+        'label' => 'Kategori Kegiatan', 
+        'rules' => 'required',
+      ),
+      array(
+        'field' => 'tgl_mulai', 
+        'label' => 'Tanggal Mulai', 
+        'rules' => 'required|callback_check_date_range',
+      ),
+      array(
+        'field' => 'tgl_berakhir', 
+        'label' => 'Tanggal Berakhir', 
+        'rules' => 'required',
       ),
       array(
         'field' => 'kuota_peserta', 
         'label' => 'Kuota Peserta', 
         'rules' => 'numeric',
+      ),
+      array(
+        'field' => 'id_instruktur_1', 
+        'label' => 'Instruktur 1', 
+        'rules' => 'required|callback_check_instruktur',
       ),
 			array(
         'field' => 'keterangan', 
@@ -150,6 +191,7 @@ class Kegiatan extends CI_Controller {
 				'keterangan' => $this->input->POST('keterangan'),
 			];
 			$this->kegiatan_model->edit($id, $data);
+      $this->session->set_flashdata('success_message', 'Data jadwal kegiatan pembinaan berhasil dirubah.');
 			redirect('kegiatan');
 		} else {
 			$data['kegiatan'] = $this->kegiatan_model->getById($id);
@@ -163,8 +205,35 @@ class Kegiatan extends CI_Controller {
 		}
 	}
 
+  public function check_date_range($tgl_mulai) {
+    $tgl_berakhir = $this->input->post('tgl_berakhir');
+
+    // Mengubah format tanggal menjadi UNIX timestamp untuk membandingkan nilai lebih mudah
+    $tgl_mulai_timestamp = strtotime($tgl_mulai);
+    $tgl_berakhir_timestamp = strtotime($tgl_berakhir);
+
+    if ($tgl_mulai_timestamp > $tgl_berakhir_timestamp) {
+        $this->form_validation->set_message('check_date_range', 'Tanggal Mulai cannot be greater than Tanggal Berakhir.');
+        return false;
+    }
+
+    return true;
+  }
+
+  public function check_instruktur($id_instruktur_1) {
+    $id_instruktur_2 = $this->input->post('id_instruktur_2');
+
+    if ($id_instruktur_1 === $id_instruktur_2) {
+        $this->form_validation->set_message('check_instruktur', 'Instruktur 1 and Instruktur 2 cannot be the same.');
+        return false;
+    }
+
+    return true;
+  }
+
 	public function delete_data($id) {
 		$this->kegiatan_model->delete($id);
+    $this->session->set_flashdata('success_message', 'Data jadwal kegiatan pembinaan berhasil dihapus.');
 		redirect('kegiatan');
 	}
 
@@ -184,6 +253,7 @@ class Kegiatan extends CI_Controller {
       'status' => '1',
     ];
     $this->kegiatan_model->changeStatus($id, $data);
+    $this->session->set_flashdata('success_message', 'Pendaftaran peserta telah disetujui.');
     redirect('kegiatan/detail_data/' . $activityId);
 	}
 
@@ -192,6 +262,7 @@ class Kegiatan extends CI_Controller {
       'status' => '2',
     ];
     $this->kegiatan_model->changeStatus($id, $data);
+    $this->session->set_flashdata('success_message', 'Pendaftaran peserta telah ditolak.');
     redirect('kegiatan/detail_data/' . $activityId);
 	}
 }
