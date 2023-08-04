@@ -11,10 +11,9 @@ class Kegiatan_model extends CI_Model {
 
   public function getDetailKegiatan() {
     $sql = "SELECT * FROM peserta_pembinaan 
-            RIGHT JOIN pembinaan 
-            ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
-            LEFT JOIN peserta 
-            ON peserta_pembinaan.id_peserta = peserta.id_peserta;";
+            RIGHT JOIN pembinaan ON pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan 
+            LEFT JOIN peserta ON peserta_pembinaan.id_peserta = peserta.id_peserta
+            ORDER BY pembinaan.tgl_mulai DESC;";
     $query = $this->db->query($sql);
     return $query->result();
 	}
@@ -25,6 +24,7 @@ class Kegiatan_model extends CI_Model {
     $this->db->join('workshop', 'pembinaan.id_permohonan = workshop.id_permohonan', 'right');
     $this->db->where('workshop.status_permohonan', '1');
     $this->db->where('pembinaan.id_permohonan IS NULL');
+    $this->db->order_by('tgl_permohonan', 'ASC');
     return $this->db->get()->result();
   }
 
@@ -52,10 +52,12 @@ class Kegiatan_model extends CI_Model {
   }
 
   public function getInstrukturName() {
+    $this->db->order_by('keahlian', 'ASC');
     return $this->db->get('instruktur')->result();
   }
 
   public function getKelasName() {
+    $this->db->order_by('nama_kelas', 'ASC');
     return $this->db->get('kelas')->result();
   }
 
@@ -70,6 +72,7 @@ class Kegiatan_model extends CI_Model {
     $this->db->join('peserta_pembinaan', 'pembinaan.id_kegiatan = peserta_pembinaan.id_kegiatan');
     $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta');
     $this->db->where('pembinaan.id_kegiatan', $id);
+    $this->db->order_by('peserta.tgl_daftar', 'ASC');
     return $this->db->get()->result();
 	}
 

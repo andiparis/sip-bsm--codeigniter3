@@ -9,13 +9,14 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
             <li class="breadcrumb-item active">Rekapitulasi Presensi</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -37,10 +38,11 @@
                     <th>Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
                     <th>Terselenggara</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
                     $attendanceMap = array();
@@ -61,7 +63,7 @@
                       $attendanceDateCount = count($uniqueDates);
                     }
 
-                    foreach($activityData as $activity) {
+                    foreach ($activityData as $activity) {
                       $activityId = $activity->id_kegiatan;
                       $activityName = $activity->nama_kegiatan;
                       $startDate = $activity->tgl_mulai;
@@ -75,20 +77,23 @@
 
                       // Mengambil nilai $attendanceDateCount untuk $activityId yang sama
                       $attendanceDateCount = isset($attendanceMap[$activityId]) ? count(array_unique($attendanceMap[$activityId])) : 0;
-                    ?>
+                  ?>
+
                     <tr>
-                      <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$activityName?></td>
-                      <td><?=$startDate?></td>
-                      <td><?=$endDate?></td>
-                      <td><?=$attendanceDateCount . ' / ' . $dateRange?></td>
+                      <td style="width: 5%;"><?= $no++ ?>.</td>
+                      <td><?= $activityName ?></td>
+                      <td><?= $startDate ?></td>
+                      <td><?= $endDate ?></td>
+                      <td><?= $attendanceDateCount ?> / <b><?= $dateRange ?></b></td>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('laporan_presensi/attendanceReport/' . $activityId)?>" class="btn btn-secondary btn-xs">
+                        <a href="<?= site_url('laporan_presensi/attendanceReport/' . $activityId) ?>" class="btn btn-secondary btn-sm" style="margin-bottom: 3px;">
                           <b><i class="fas fa-info"></i> Detail</b>
                         </a>
                       </td>
                     </tr>
+
                   <?php } ?>
+
                 </tbody>
               </table>
             </div>

@@ -5,17 +5,18 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Detail Kegiatan</b></h1>
+          <h1><b>Detail</b> Kegiatan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
-            <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('kegiatan') ?>">Kelola Jadwal Kegiatan</a></li>
             <li class="breadcrumb-item active">Detail Kegiatan</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -28,61 +29,61 @@
               <tr>
                 <td>Nama Kegiatan</td>
                 <td> : </td>
-                <?php foreach($activityData as $activity) { $activityName = $activity->nama_kegiatan; } ?>
-                  <td><?=$activityName?></td>
+                <?php foreach ($activityData as $activity) { $activityName = $activity->nama_kegiatan; } ?>
+                  <td><?= $activityName ?></td>
               </tr>
               <tr>
                 <td>Instruktur 1</td>
                 <td> : </td>
-                <?php foreach($activityData as $activity) { $instructor1 = $activity->nama; } ?>
-                  <td><?=$instructor1?></td>
+                <?php foreach ($activityData as $activity) { $instructor1 = $activity->nama; } ?>
+                  <td><?= $instructor1 ?></td>
               </tr>
               <tr>
                 <td>Instruktur 2</td>
                 <td> : </td>
                 <?php 
-                  foreach($activityData as $activity) {
+                  foreach ($activityData as $activity) {
                     $instructor2 = $activity->id_instruktur_2;
-                    if($instructor2 == null) {
+                    if ($instructor2 == null) {
                       $instructor2 = '-';  
                     } else {
-                      foreach($instructor2Data as $instructor) { 
+                      foreach ($instructor2Data as $instructor) { 
                         $instructor2 = $instructor->nama;
                       }
                     }
                   }
                 ?>
-                  <td><?=$instructor2?></td>
+                  <td><?= $instructor2 ?></td>
               </tr>
               <tr>
                 <td>Kelas</td>
                 <td> : </td>
                 <?php 
-                  foreach($activityData as $activity) {
+                  foreach ($activityData as $activity) {
                     $className = $activity->id_kelas;
-                    if($className == null) {
+                    if ($className == null) {
                       $className = '-';  
                     } else {
-                      foreach($classData as $class) { 
+                      foreach ($classData as $class) { 
                         $className = $class->nama_kelas;
                       }
                     }
                   }
                 ?>
-                  <td><?=$className?></td>
+                  <td><?= $className ?></td>
               </tr>
               <tr>
                 <td>Keterangan</td>
                 <td> : </td>
                 <?php 
-                  foreach($activityData as $activity) {
+                  foreach ($activityData as $activity) {
                     $note = $activity->keterangan;
-                    if($note == null) {
+                    if ($note == null) {
                       $note = '-';
                     }
                   } 
                 ?>
-                  <td><?=$note?></td>
+                  <td><?= $note ?></td>
               </tr>
             </table>
           </div>
@@ -90,8 +91,8 @@
             <div class="card-header">
               <h3 class="card-title"><b>Data Peserta Pembinaan</b></h3>
               <div class="float-sm-right">
-                <a href="<?=site_url('kegiatan')?>" class="btn btn-warning">
-                  <b style="color: white"><i class="fas fa-undo"></i> Back</b>
+                <a href="<?= site_url('kegiatan') ?>" class="btn btn-warning">
+                  <b style="color: white"><i class="fas fa-chevron-left"></i> Back</b>
                 </a>
               </div>
             </div>
@@ -107,61 +108,62 @@
                     <th>No. Telp</th>
                     <th>Alamat</th>
                     <th>Email</th>
-                    <!-- <th>Kegiatan</th> -->
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
                     $no = 1;
-                    foreach($data as $detailKegiatan) { 
-                      if($detailKegiatan->jk == 'l')
+                    foreach ($data as $detailKegiatan) { 
+                      if ($detailKegiatan->jk == 'l') {
                         $jk = 'Laki-laki';
-                      else
+                      } else {
                         $jk = 'Perempuan';
+                      }
 
-                      if($detailKegiatan->email == null)
+                      if ($detailKegiatan->email == null) {
                         $email = '-';
-                      else
+                      } else {
                         $email = $detailKegiatan->email;
+                      }
                       
-                      if($detailKegiatan->status == '0')
+                      if ($detailKegiatan->status == '0') {
                         $status = 'Menunggu';
-                      else if($detailKegiatan->status == '1')
+                        $style = 'warning';
+                      } else if ($detailKegiatan->status == '1') {
                         $status = 'Disetujui';
-                      else if($detailKegiatan->status == '2')
+                        $style = 'success';
+                      } else if ($detailKegiatan->status == '2') {
                         $status = 'Ditolak';
-                      
-                      // foreach($data as $detailKegiatan) {
-                      //   if($detailKegiatan->id_peserta == $kegiatan->id_peserta)
-                      //     $jenis_kegiatan = $kegiatan->nama_kegiatan;
-                      // }
+                        $style = 'danger';
+                      }
                   ?>
+
                     <tr>
-                      <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$detailKegiatan->tgl_daftar?></td>
-                      <td><?=$detailKegiatan->nama?></td>
-                      <td><?=$jk?></td>
-                      <td><?=$detailKegiatan->telp?></td>
-                      <td><?=$detailKegiatan->alamat?></td>
-                      <td><?=$email?></td>
-                      <!-- <td><?=$jenis_kegiatan?></td> -->
-                      <td><?=$status?></td>
+                      <td style="width: 5%;"><?= $no++ ?>.</td>
+                      <td><?= $detailKegiatan->tgl_daftar ?></td>
+                      <td><?= $detailKegiatan->nama ?></td>
+                      <td><?= $jk ?></td>
+                      <td><?= $detailKegiatan->telp ?></td>
+                      <td><?= $detailKegiatan->alamat ?></td>
+                      <td><?= $email ?></td>
+                      <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $status ?></span></td>
                       <td class="text-center" width="150px">
-                        <?php if($detailKegiatan->status == '0') { ?>
-                        <a href="<?=site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta)?>" class="btn btn-success btn-xs">
-                          <b>Setujui</b>
-                        </a>
-                        <a href="<?=site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta)?>" class="btn btn-danger btn-xs">
-                          <b>Tolak</b>
-                        </a>
+                        <?php if ($detailKegiatan->status == '0') { ?>
+                          <a href="<?= site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px;">
+                            <b>Setujui</b>
+                          </a>
+                          <a href="<?= site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px;">
+                            <b>Tolak</b>
+                          </a>
                         <?php } ?>
                       </td>
                     </tr>
-                  <?php 
-                    } 
-                  ?>
+
+                  <?php } ?>
+
                 </tbody>
               </table>
             </div>
