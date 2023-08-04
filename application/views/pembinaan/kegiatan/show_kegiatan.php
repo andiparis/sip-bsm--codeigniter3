@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Kelola Jadwal Kegiatan</b></h1>
+          <h1><b>Kelola</b> Jadwal Kegiatan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -15,7 +15,8 @@
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -40,11 +41,11 @@
                     <th>No.</th>
                     <th>Kategori</th>
                     <th>Nama Kegiatan</th>
-                    <th>Tgl Mulai</th>
+                    <th width="75px">Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
                     <th>Kuota Peserta</th>
                     <th>Menunggu Konfirmasi</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -92,7 +93,13 @@
                         $category = 'Pelatihan';
                       } else {
                         $category = 'Workshop';
-                      }                   
+                      }
+
+                      if ($waitingParticipant > 0) {
+                        $style = 'primary';
+                      } else {
+                        $style = 'muted';
+                      }
                   ?>
 
                     <tr>
@@ -102,20 +109,20 @@
                       <td><?= $startDate ?></td>
                       <td><?= $endDate ?></td>
                       <?php if ($activityCategory != '3') { ?>
-                        <td><?= $acceptedParticipant . ' / ' . $participantQuota ?></td>
-                        <td><?= $waitingParticipant ?></td>
+                        <td><?= $acceptedParticipant ?> / <b><?= $participantQuota ?></b></td>
+                        <td class="text-<?= $style ?>"><b><?= $waitingParticipant ?></b></td>
                       <?php } else { ?>
                         <td> - </td>
                         <td> - </td>
                       <?php } ?>
-                      <td class="text-center" width="150px">
-                        <a href="<?= site_url('kegiatan/detail_data/' . $activityId) ?>" class="btn btn-secondary btn-xs">
+                      <td class="text-center" style="max-width: 200px;">
+                        <a href="<?= site_url('kegiatan/detail_data/' . $activityId) ?>" class="btn btn-secondary btn-sm" style="margin-bottom: 3px;">
                           <b><i class="fas fa-info"></i> Detail</b>
                         </a>
-                        <a href="<?= site_url('kegiatan/edit_data/' . $activityId) ?>" class="btn btn-warning btn-xs" style="color: white;">
+                        <a href="<?= site_url('kegiatan/edit_data/' . $activityId) ?>" class="btn btn-warning btn-sm" style="margin-bottom: 3px; color: white;">
                           <b><i class="fas fa-edit"></i> Edit</b>
                         </a>
-                        <a href="<?= site_url('kegiatan/delete_data/' . $activityId) ?>" class="btn btn-danger btn-xs">
+                        <a href="<?= site_url('kegiatan/delete_data/' . $activityId) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px;" onclick="return confirmDelete();">
                           <b><i class="fas fa-trash"></i> Delete</b>
                         </a>
                       </td>
@@ -139,3 +146,14 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+  function confirmDelete() {
+    var result = confirm("Apakah Anda yakin ingin menghapus data ini?");
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
