@@ -30,6 +30,7 @@ class Program extends CI_Controller {
 		$this->load->view('homepage/show_activity', $data);
   }
 
+  // Probably this code unused
   public function registrationForm($activityId) {
     $data['activity'] = $this->pendaftaran_model->getActivityById($activityId);
     $this->load->view('homepage/header');
@@ -42,7 +43,7 @@ class Program extends CI_Controller {
 			array(
         'field' => 'nama', 
         'label' => 'Nama Lengkap', 
-        'rules' => 'max_length[50]',
+        'rules' => 'required|max_length[50]',
       ),
       array(
         'field' => 'jk', 
@@ -52,12 +53,12 @@ class Program extends CI_Controller {
 			array(
         'field' => 'telp', 
         'label' => 'No. Telp', 
-        'rules' => 'max_length[15]|numeric',
+        'rules' => 'required|numeric|max_length[15]',
       ),
       array(
         'field' => 'alamat', 
         'label' => 'Alamat', 
-        'rules' => 'max_length[100]',
+        'rules' => 'required|max_length[100]',
       ),
       array(
         'field' => 'email', 
@@ -69,10 +70,10 @@ class Program extends CI_Controller {
 
     $idPeserta = $this->pendaftaran_model->makeIdPeserta();
     $email = $this->input->post('email');
-    if($email == '')
+    if ($email == '')
       $email = null;
 	
-	 	if($this->form_validation->run()) {
+	 	if ($this->form_validation->run()) {
 			$dataPeserta = [
         'id_peserta' => $idPeserta,
         'nama' => $this->input->POST('nama'),
@@ -90,10 +91,17 @@ class Program extends CI_Controller {
         'id_kegiatan' => $activityId,
       ];
       $this->pendaftaran_model->addPesertaPembinaan($dataPesertaPembinaan);
+      $this->session->set_flashdata('success_message', 'Pendaftaran anda berhasil dikirimkan. Sampai berjumpa pada kegiatan yang akan berlangsung.');
 			redirect('program');
-		}
+		} else {
+      $data['activity'] = $this->pendaftaran_model->getActivityById($activityId);
+      $this->load->view('homepage/header');
+      $this->load->view('homepage/registration_form', $data);
+      $this->load->view('homepage/footer');
+    }
   }
 
+  // Probably this code unused
   public function permohonan() {
     $this->load->view('homepage/header');
 		$this->load->view('homepage/workshop_request');
@@ -103,24 +111,24 @@ class Program extends CI_Controller {
   public function addRequest() {
     $config = array(
 			array(
-        'field' => 'name', 
-        'label' => 'Nama Lengkap', 
-        'rules' => 'max_length[50]',
+        'field' => 'name_of_requester', 
+        'label' => 'Nama Pemohon', 
+        'rules' => 'required|max_length[50]',
       ),
 			array(
         'field' => 'phone', 
         'label' => 'No. Telp', 
-        'rules' => 'max_length[15]|numeric',
+        'rules' => 'required|numeric|max_length[15]',
       ),
       array(
         'field' => 'activity_name', 
         'label' => 'Nama Kegiatan', 
-        'rules' => 'max_length[50]',
+        'rules' => 'required|max_length[50]',
       ),
       array(
-        'field' => 'location', 
+        'field' => 'activity_location', 
         'label' => 'Alamat Kegiatan', 
-        'rules' => 'max_length[100]',
+        'rules' => 'required|max_length[100]',
       ),
       array(
         'field' => 'note', 
@@ -139,11 +147,12 @@ class Program extends CI_Controller {
       $configUpload['max_size']       = 2048;
       $this->load->library('upload', $configUpload);
 
-      if (!$this->upload->do_upload('activity_letter')) {
-        $data['error'] = $this->upload->display_errors();
-        echo $data['error'];
-      } else {
+      if ($this->upload->do_upload('activity_letter')) {
         $uploadedData = $this->upload->data();
+      } else {
+        $data['error'] = $this->upload->display_errors();
+        $this->session->set_flashdata('upload_error', $data['error']);
+        redirect('program/addRequest');
       }
 
       $data = [
@@ -159,7 +168,12 @@ class Program extends CI_Controller {
 			];
 
       $this->permohonan_model->addRequest($data);
+      $this->session->set_flashdata('success_message', 'Permohonan workshop anda berhasil dikirimkan. Jika terdapat jadwal kami yang mungkin bentrok dengan jadwal permohonan kegiatan anda, maka akan kami hubungi untuk informasi lebih lanjut.');
       redirect('program');
-		}
+		} else {
+      $this->load->view('homepage/header');
+      $this->load->view('homepage/workshop_request');
+      $this->load->view('homepage/footer');
+    }
   }
 }
