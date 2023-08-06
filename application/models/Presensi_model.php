@@ -6,7 +6,8 @@ class Presensi_model extends CI_Model {
     $sql = "SELECT * FROM pembinaan 
             WHERE pembinaan.kategori IN ('1', '2') 
             AND DATE_ADD(pembinaan.tgl_berakhir, INTERVAL 1 MONTH) > CURDATE()
-            AND (pembinaan.id_instruktur_1 = '$id' OR pembinaan.id_instruktur_2 = '$id')";
+            AND (pembinaan.id_instruktur_1 = '$id' OR pembinaan.id_instruktur_2 = '$id')
+            ORDER BY pembinaan.tgl_mulai DESC;";
     return $this->db->query($sql)->result();
   }
 

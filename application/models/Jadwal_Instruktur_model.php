@@ -8,6 +8,7 @@ class Jadwal_Instruktur_model extends CI_Model {
     $this->db->join('pembinaan', 'peserta_pembinaan.id_kegiatan = pembinaan.id_kegiatan', 'right');
     $this->db->join('peserta', 'peserta_pembinaan.id_peserta = peserta.id_peserta', 'left');
     $this->db->where("(pembinaan.id_instruktur_1 = '$id' OR pembinaan.id_instruktur_2 = '$id')");
+    $this->db->order_by('pembinaan.tgl_mulai', 'DESC');
     return $this->db->get()->result();
 	}
 

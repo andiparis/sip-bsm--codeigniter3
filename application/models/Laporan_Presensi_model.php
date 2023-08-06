@@ -4,7 +4,8 @@ class Laporan_Presensi_model extends CI_Model {
 
   public function getActivity() {
     $sql = "SELECT * FROM pembinaan 
-            WHERE pembinaan.kategori IN ('1', '2');";
+            WHERE pembinaan.kategori IN ('1', '2')
+            ORDER BY pembinaan.tgl_mulai DESC;";
     return $this->db->query($sql)->result();
   }
 
@@ -30,7 +31,8 @@ class Laporan_Presensi_model extends CI_Model {
             JOIN peserta 
             ON peserta_pembinaan.id_peserta = peserta.id_peserta
             WHERE pembinaan.id_kegiatan = '$id' 
-            AND (peserta.status IS NULL OR peserta.status NOT IN ('0', '2'));";
+            AND (peserta.status IS NULL OR peserta.status NOT IN ('0', '2'))
+            ORDER BY peserta.nama ASC;";
     return $this->db->query($sql)->result();
 	}
 
