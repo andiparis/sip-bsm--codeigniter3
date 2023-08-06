@@ -2,7 +2,7 @@
 <div id="intro-example" class="py-5 text-center bg-image" style="background-image: url('<?= base_url() ?>assets/dist/img/home1.jpg'); height: 300px;">
   <div class="mask d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
-      <b><h1 class="text-center display-4">Ikuti kegiatan kami dan terapkan di daerahmu</h1></b>
+      <h1 class="text-center display-4">Ikuti kegiatan kami dan terapkan di daerahmu</h1>
     </div>
   </div>
 </div>
@@ -17,22 +17,31 @@
     <div class="col-lg-7 order-1 order-lg-2">
       <h2 class="text-center">Kegiatan Edukasi</h2><br>
       <h4>Pelatihan</h4>
-      <p class="lead text-muted d-md-block">Kegiatan pelatihan yang dilakukan Bank Sampah Malang terdiri menjadi 2, yakni pelatihan pembuatan kerajinan tangan dan pemilihan jenis sampah sesuai dengan kategori sampah yang telah dimiliki oleh Bank Sampah Malang.</p>
+      <p class="lead text-muted d-md-block">Kegiatan pelatihan yang dilakukan Bank Sampah Malang terdiri menjadi 2,
+        yakni pelatihan pembuatan kerajinan tangan dan pemilihan jenis sampah sesuai dengan kategori sampah yang telah
+        dimiliki oleh Bank Sampah Malang. Pelatihan ini kami laksanakan mulai dari jam 10 pagi hingga jam 2 siang, untuk
+        jadwal yang tersedia dapat di cek dengan menekan tombol daftar di bawah ini.</p>
       <h4>Magang</h4>
-      <p class="lead text-muted d-md-block">Kegiatan magang yang disediakan ini mencakup pembelajaran seluruh proses kerja yang terjadi pada Bank Sampah Malang. Dengan adanya kegiatan ini diharapkan, peserta magang dapat menerapkan ilmu yang telah didapatkannya pada daerah masing-masing.</p>
+      <p class="lead text-muted d-md-block">Kegiatan magang yang disediakan ini mencakup pembelajaran seluruh proses
+        kerja yang terjadi pada Bank Sampah Malang. Dengan adanya kegiatan ini diharapkan, peserta magang dapat
+        menerapkan ilmu yang telah didapatkannya pada daerah masing-masing. Mirip dengan pelatihan, kegiatan magang ini kami
+        laksanakan mulai dari jam 10 pagi hingga jam 2 siang, untuk ketersedian jadwal dapat di cek dengan menekan tombol 
+        daftar di bawah ini.</p>
       <a href="<?= site_url('program/pendaftaran') ?>" class="btn btn-success">
         <b>Daftar Sekarang</b>
       </a>
     </div>
   </div>
   <hr>
+  
   <!-- Workshop Section -->
   <div class="row py-5 justify-content-center align-items-center" id="workshop">
     <div class="col-lg-6">
       <h2 class="text-center">Workshop</h2><br>
       <h4>Permohonan Workshop</h4>
-      <p class="text-muted">Bank Sampah Malang juga dapat menyediakan kegiatan workshop di daerah-daerah melalui permohonan workshop yang dilakukan masyarakat dan telah diterima oleh Bank Sampah Malang.</p>
-      <a href="<?= site_url('program/permohonan') ?>" class="btn btn-success">
+      <p class="text-muted">Bank Sampah Malang juga dapat menyediakan kegiatan workshop di daerah-daerah melalui
+        permohonan workshop yang dilakukan masyarakat dan telah diterima oleh Bank Sampah Malang.</p>
+      <a href="<?= site_url('program/addRequest') ?>" class="btn btn-success">
         <b>Lakukan Permohonan</b>
       </a>
     </div>

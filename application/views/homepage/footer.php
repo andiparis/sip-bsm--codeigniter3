@@ -20,25 +20,25 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <!-- jQuery -->
-<script src="<?=base_url()?>assets/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- DataTables & Plugins -->
-<script src="<?=base_url()?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/jszip/jszip.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 <!-- InputMask -->
-<script src="<?=base_url()?>assets/plugins/moment/moment.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?= base_url() ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url() ?>assets/plugins/toastr/toastr.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="<?= base_url() ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
-  $(function() {
+  $(function () {
+    bsCustomFileInput.init();
+
     $("#datatable1").DataTable({
       "responsive": true,
       "lengthChange": false,
@@ -56,6 +56,11 @@
     $('#tglberakhir').datetimepicker({
       format: 'YYYY-MM-DD'
     });
+
+    // Toastr
+    <?php if ($this->session->flashdata('success_message')) { ?>
+      toastr.info("<?= $this->session->flashdata('success_message') ?>");
+    <?php } ?>
   });
 </script>
 
