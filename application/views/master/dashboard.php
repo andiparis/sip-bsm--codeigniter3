@@ -75,7 +75,7 @@
             <div class="icon">
               <i class="fas fa-file-signature"></i>
             </div>
-            <a href="<?= site_url('kegiatan') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?= site_url('laporan_permohonan') ?>" class="small-box-footer">Informasi lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
