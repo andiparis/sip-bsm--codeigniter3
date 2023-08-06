@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sertifikat Peserta</title>
+  <title>Sertifikat - <?= $detailParticipant->nama ?></title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     html, body, div {
       margin: 0;
       padding: 0;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .text-container {
@@ -18,14 +23,14 @@
     }
 
     h1 {
-      font-family: sans-serif;
       font-size: 52px;
+      font-weight: 600;
       margin-bottom: 10px;
     }
      
     p {
-      font-family: sans-serif;
-      font-size: 24px;
+      font-size: 20px;
+      font-weight: 400;
     }
 
     .img-container {
@@ -46,7 +51,7 @@
 </head>
 <body>
   <div class="img-container">
-    <img src="<?=base_url()?>assets/dist/img/certificate-layout.png" class="img-full">
+    <img src="<?= base_url() ?>assets/dist/img/certificate-layout.png" class="img-full">
   </div>
   <div class="text-container">
     <h1><?= $detailParticipant->nama ?></h1>
