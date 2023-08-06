@@ -27,6 +27,6 @@ class Pdf extends Dompdf {
     $this->set_option('isRemoteEnabled', TRUE);
     $this->loadHtml($html);
     $this->render();
-    $this->stream($this->filename, array('Attachment' => false));
+    return $this->output(); // Return the generated PDF content
   }
 }

@@ -12,10 +12,11 @@ class Cetak_Sertifikat extends CI_Controller {
 
   function __construct() {
 		parent::__construct();
+    $this->load->helper('download');
     $this->load->library('pdf');
     $this->load->model('laporan_presensi_model');
     
-		if($this->session->userdata('status') != "login") {
+		if ($this->session->userdata('status') != "login") {
 			redirect(base_url("auth"));
 		}
 	}
@@ -39,15 +40,17 @@ class Cetak_Sertifikat extends CI_Controller {
 
   public function printCertificate($participantId) {
     $data['detailParticipant'] = $this->laporan_presensi_model->getDetailParticipantById($participantId);
+    $activityName = $data['detailParticipant']->nama_kegiatan;
+    $participantName = $data['detailParticipant']->nama;
+    
     $this->pdf->setPaper('A4', 'landscape');
-    $this->pdf->filename = $participantId . ".pdf";
-    $this->pdf->load_view('pembinaan/print_certificate/certificate_layout', $data);
-    // $dompdf = new \Dompdf\Dompdf();
-    // $dompdf->set_option('isRemoteEnabled', TRUE);
-    // $certificate_layout = $this->load->view('pembinaan/print_certificate/certificate_layout', $data, true);
-    // $dompdf->loadHTML($certificate_layout);
-    // $dompdf->setPaper('A4', 'landscape');
-    // $dompdf->render();
-    // $dompdf->stream();
+    $pdfContent = $this->pdf->load_view('pembinaan/print_certificate/certificate_layout', $data);
+    $pdfFilename = $activityName . '_' . $participantName . '.pdf';
+
+    // Set the appropriate headers to force download
+    header("Content-Type: application/pdf");
+    header("Content-Disposition: attachment; filename=\"$pdfFilename\"");
+    header("Content-Length: " . strlen($pdfContent));
+    echo $pdfContent;
   }
 }
