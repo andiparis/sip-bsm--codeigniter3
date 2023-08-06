@@ -9,12 +9,13 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?=site_url('dashboard')?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active">Presensi Peserta</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -35,62 +36,72 @@
                     <th>Kegiatan</th>
                     <th>Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
-                    <th>Action</th>
+                    <th>Terselenggara</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php 
+                    // $no = 1;
+                    // foreach ($activityData as $activity) {
+                    //   $activityId = $activity->id_kegiatan;
+                    //   $activityName = $activity->nama_kegiatan;
+                    //   $startDate = $activity->tgl_mulai;
+                    //   $endDate = $activity->tgl_berakhir;
+
                     $no = 1;
-                    foreach($activityData as $activity) {
+                    $attendanceMap = array();
+                    foreach ($attendanceData as $attendance) {
+                      $activityId = $attendance->id_kegiatan;
+                      $date = $attendance->tgl;
+                      if (!array_key_exists($activityId, $attendanceMap)) {
+                        $attendanceMap[$activityId] = array();
+                      }
+
+                      if ($date != null) {
+                        $attendanceMap[$activityId][] = $date;
+                      }
+                    }
+
+                    foreach ($attendanceMap as $activityId => $dates) {
+                      $uniqueDates = array_unique($dates);
+                      $attendanceDateCount = count($uniqueDates);
+                    }
+
+                    foreach ($activityData as $activity) {
                       $activityId = $activity->id_kegiatan;
                       $activityName = $activity->nama_kegiatan;
                       $startDate = $activity->tgl_mulai;
                       $endDate = $activity->tgl_berakhir;
-                    // $presensiPesertaMap = array();
-                    // foreach($data as $presensiPeserta) { 
-                    //   $idPesertaPembinaan = $presensiPeserta->id_peserta_pembinaan;
-                    //   // 
-                    //   $test = $presensiPeserta->status_kehadiran;
-                    //   echo $test;
 
-                    //   if(!array_key_exists($idPesertaPembinaan, $presensiPesertaMap)) {
-                    //     $presensiPesertaMap[$idPesertaPembinaan] = array(
-                    //       'duplicateCount' => 0,
-                    //       'status0Count' => 0,
-                    //       'status1Count' => 0,
-                    //       'startDate' => $presensiPeserta->tgl_mulai,
-                    //       'endDate' => $presensiPeserta->tgl_berakhir,
-                    //       'activityName' => $presensiPeserta->nama_kegiatan,
-                    //       'participantName' => $presensiPeserta->nama
-                    //     );
-                    //   }
-                    //   $presensiPesertaMap[$idPesertaPembinaan]['duplicateCount']++;
-                    //   if($presensiPeserta->status_kehadiran == '0') {
-                    //     $presensiPesertaMap[$idPesertaPembinaan]['status0Count']++;
-                    //   } else if($presensiPeserta->status_kehadiran == '1') {
-                    //     $presensiPesertaMap[$idPesertaPembinaan]['status1Count']++;
-                    //   }
-                    // }
+                      $startDateObj = new DateTime($startDate);
+                      $endDateObj = new DateTime($endDate);
+                      $endDateObj->modify('+1 day');
+                      $diff = $startDateObj->diff($endDateObj);
+                      $dateRange = $diff->days;
 
-                    // foreach($presensiPesertaMap as $idPesertaPembinaan => $presensi) {
-                    //   $activityName = $presensi['activityName'];
-                    //   $participantName = $presensi['participantName'];
-                    //   $status0Count = $presensi['status0Count'];
-                    //   $status1Count = $presensi['status1Count'];
-                    //   $duplicateCount = $presensi['duplicateCount'];
+                      // Mengambil nilai $attendanceDateCount untuk $activityId yang sama
+                      $attendanceDateCount = isset($attendanceMap[$activityId]) ? count(array_unique($attendanceMap[$activityId])) : 0;
                   ?>
+
                     <tr>
-                      <td style="width: 5%;"><?=$no++?>.</td>
-                      <td><?=$activityName?></td>
-                      <td><?=$startDate?></td>
-                      <td><?=$endDate?></td>
+                      <td style="width: 5%;"><?= $no++ ?>.</td>
+                      <td><?= $activityName ?></td>
+                      <td><?= $startDate ?></td>
+                      <td><?= $endDate ?></td>
+                      <td><?= $attendanceDateCount ?> / <b><?= $dateRange ?></b></td>
                       <td class="text-center" width="150px">
-                        <a href="<?=site_url('presensi/addAttendance/' . $activityId)?>" class="btn btn-success btn-xs">
-                          <b><i class="fas fa-edit"></i> Presensi</b>
-                        </a>
+                        <?php if ($attendanceDateCount < $dateRange) { ?>
+                          <a href="<?= site_url('presensi/addAttendance/' . $activityId) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px;">
+                            <b><i class="fas fa-edit"></i> Presensi</b>
+                          </a>
+                        <?php } ?>
                       </td>
                     </tr>
+
                   <?php } ?>
+
                 </tbody>
               </table>
             </div>

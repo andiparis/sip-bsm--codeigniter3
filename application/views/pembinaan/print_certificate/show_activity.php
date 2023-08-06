@@ -15,7 +15,8 @@
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -37,7 +38,7 @@
                     <th>Tgl Mulai</th>
                     <th>Tgl Berakhir</th>
                     <th>Terselenggara</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,9 +86,9 @@
                       <td><?= $activityName ?></td>
                       <td><?= $startDate ?></td>
                       <td><?= $endDate ?></td>
-                      <td><?= $attendanceDateCount . ' / ' . $dateRange ?></td>
+                      <td><?= $attendanceDateCount ?> / <b><?= $dateRange ?></b></td>
                       <td class="text-center" width="150px">
-                        <a href="<?= site_url('cetak_sertifikat/participantReport/' . $activityId) ?>" class="btn btn-secondary btn-xs">
+                        <a href="<?= site_url('cetak_sertifikat/participantReport/' . $activityId) ?>" class="btn btn-secondary btn-sm" style="margin-bottom: 3px;">
                           <b><i class="fas fa-info"></i> Detail</b>
                         </a>
                       </td>

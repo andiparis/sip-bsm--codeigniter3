@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Detail Kegiatan</b></h1>
+          <h1><b>Detail</b> Kegiatan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -14,7 +14,8 @@
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -90,7 +91,7 @@
               <h3 class="card-title"><b>Data Peserta Pembinaan</b></h3>
               <div class="float-sm-right">
                 <a href="<?= site_url('jadwal_instruktur') ?>" class="btn btn-warning">
-                  <b style="color: white"><i class="fas fa-undo"></i> Back</b>
+                  <b style="color: white"><i class="fas fa-chevron-left"></i> Back</b>
                 </a>
               </div>
             </div>

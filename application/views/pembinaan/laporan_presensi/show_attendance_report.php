@@ -5,17 +5,18 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Rekapitulasi Presensi</b></h1>
+          <h1><b>Rekapitulasi</b> Presensi</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
-            <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
-            <li class="breadcrumb-item active">Rekapitulasi Presensi</li>
+            <li class="breadcrumb-item"><a href="<?= site_url('laporan_presensi') ?>">Rekapitulasi Presensi</a></li>
+            <li class="breadcrumb-item active">Detail Presensi</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -25,10 +26,10 @@
         <div class="col-12">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><b>Data Presensi Peserta Pembinaan</b></h3>
+              <h3 class="card-title"><b>Laporan Presensi Peserta Pembinaan</b></h3>
               <div class="float-sm-right">
                 <a href="<?= site_url('laporan_presensi') ?>" class="btn btn-warning">
-                  <b style="color: white"><i class="fas fa-undo"></i> Back</b>
+                  <b style="color: white"><i class="fas fa-chevron-left"></i> Back</b>
                 </a>
               </div>
             </div>
@@ -81,6 +82,7 @@
 
                       if ($participantAttendanceCount != 0) {
                         $attendanceParticipantPercentage = ($participantAttendanceCount / $attendanceDateCount) * 100;
+                        $attendanceParticipantPercentage = number_format($attendanceParticipantPercentage, 1);
                       } else {
                         $attendanceParticipantPercentage = 0;
                       }

@@ -5,17 +5,18 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Laporan</b> Peserta</h1>
+          <h1><b>Cetak</b> Sertifikat</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
-            <li class="breadcrumb-item active">Kegiatan Pembinaan</li>
+            <li class="breadcrumb-item"><a href="<?= site_url('cetak_sertifikat') ?>">Cetak Sertifikat</a></li>
             <li class="breadcrumb-item active">Laporan Peserta</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
 
   <!-- Main content -->
@@ -25,10 +26,10 @@
         <div class="col-12">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title"><b>Data Peserta Pembinaan</b></h3>
+              <h3 class="card-title"><b>Laporan Peserta</b></h3>
               <div class="float-sm-right">
-                <a href="<?= site_url('laporan_presensi') ?>" class="btn btn-warning">
-                  <b style="color: white"><i class="fas fa-undo"></i> Back</b>
+                <a href="<?= site_url('cetak_sertifikat') ?>" class="btn btn-warning">
+                  <b style="color: white"><i class="fas fa-chevron-left"></i> Back</b>
                 </a>
               </div>
             </div>
@@ -103,14 +104,12 @@
                       <td><?= $phoneNumber ?></td>
                       <td><?= $email ?></td>
                       <td style="width: 10%;"><?= $attendanceParticipantPercentage . '%' ?></td>
-                      <td style="width: 10%;">
-
-                      <?php if ($attendanceParticipantPercentage >= 75) { ?>
-                        <a href="<?=site_url('cetak_sertifikat/printCertificate/' . $participantId)?>" class="btn btn-primary btn-xs">
-                          <b><i class="fas fa-download"></i> Download</b>
-                        </a>
-                      <?php } ?>
-
+                      <td class="text-center" width="150px">
+                        <?php if ($attendanceParticipantPercentage >= 75) { ?>
+                          <a href="<?=site_url('cetak_sertifikat/printCertificate/' . $participantId)?>" target="_blank" class="btn btn-primary btn-sm" style="margin-bottom: 3px;">
+                            <b><i class="fas fa-download"></i> Download</b>
+                          </a>
+                        <?php } ?>
                       </td>
                     </tr>
 
