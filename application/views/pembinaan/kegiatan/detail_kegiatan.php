@@ -149,13 +149,13 @@
                       <td><?= $detailKegiatan->telp ?></td>
                       <td><?= $detailKegiatan->alamat ?></td>
                       <td><?= $email ?></td>
-                      <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $status ?></span></td>
+                      <td class="text-center"><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $status ?></span></td>
                       <td class="text-center" width="150px">
                         <?php if ($detailKegiatan->status == '0') { ?>
-                          <a href="<?= site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px;">
+                          <a href="<?= site_url('kegiatan/setujui_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px;" onclick="return confirm('Apakah Anda yakin ingin menyetujui pendaftaran peserta ini?');">
                             <b>Setujui</b>
                           </a>
-                          <a href="<?= site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px;">
+                          <a href="<?= site_url('kegiatan/tolak_pendaftaran/' . $detailKegiatan->id_kegiatan . '/' . $detailKegiatan->id_peserta) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px;" onclick="return confirm('Apakah Anda yakin ingin menolak pendaftaran peserta ini?');">
                             <b>Tolak</b>
                           </a>
                         <?php } ?>

@@ -88,13 +88,13 @@
                         <a href="<?= base_url('uploads/activity_letter/') . $activityLetter ?>" target="_blank"><?= $activityLetter ?></a>
                       </td>
                       <td><?= $note ?></td>
-                      <td><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $requestStatus ?></span></td>
+                      <td class="text-center"><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $requestStatus ?></span></td>
                       <td class="text-center" width="150px">
                         <?php if ($status == '0') { ?>
-                          <a href="<?= site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px">
+                          <a href="<?= site_url('laporan_permohonan/approveRequest/' . $requestId) ?>" class="btn btn-success btn-sm" style="margin-bottom: 3px" onclick="return confirm('Apakah Anda yakin ingin menyetujui permohonan workshop ini?');">
                             <b>Setujui</b>
                           </a>
-                          <a href="<?= site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px">
+                          <a href="<?= site_url('laporan_permohonan/rejectRequest/' . $requestId) ?>" class="btn btn-danger btn-sm" style="margin-bottom: 3px" onclick="return confirm('Apakah Anda yakin ingin menolak permohonan workshop ini?');">
                             <b>Tolak</b>
                           </a>
                         <?php } ?>
