@@ -62,5 +62,89 @@
       <img src="<?= base_url() ?>assets/dist/img/home5.jpg" class="rounded img-fluid" alt="Gallery">
     </div>
   </div>
+  <hr>
+
+  <!-- Activity Section -->
+  <div class="row py-5 justify-content-center align-items-center" id="program">
+    <div class="col-lg-12">
+      <h3 class="text-center">Kegiatan yang Akan Berlangsung</h3><br>
+    </div>
+    <div class="container">
+      <div class="card-body pad table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Nama Kegiatan</th>
+              <th>Kategori</th>
+              <th>Tgl Mulai</th>
+              <th>Tgl Berakhir</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <?php 
+              $no = 1;
+              $activityDetailMap = array();
+              foreach ($activities as $activity) { 
+                $activityId = $activity->id_kegiatan;
+                $activityStatus = $activity->status;
+                if (!array_key_exists($activityId, $activityDetailMap)) {
+                  $activityDetailMap[$activityId] = array(
+                    'acceptedParticipant' => 0,
+                    'activityId' => $activity->id_kegiatan,
+                    'activityName' => $activity->nama_kegiatan,
+                    'activityCategory' => $activity->kategori,
+                    'startDate' => $activity->tgl_mulai,
+                    'endDate' => $activity->tgl_berakhir,
+                    'participantQuota' => $activity->kuota,
+                  );
+                }
+
+                if ($activityStatus == '1') {
+                  $activityDetailMap[$activityId]['acceptedParticipant']++;
+                } else if ($activityStatus == null) {
+                  $activityDetailMap[$activityId]['acceptedParticipant'] = null;
+                }
+              }
+
+              foreach ($activityDetailMap as $activityId => $activity) {
+                $participantQuota = $activity['participantQuota'];
+                $acceptedParticipant = $activity['acceptedParticipant'];
+                if ($acceptedParticipant < $participantQuota || $acceptedParticipant == null) {
+                  $activityId = $activity['activityId'];
+                  $activityName = $activity['activityName'];
+                  $activityCategory = $activity['activityCategory'];
+                  $startDate = $activity['startDate'];
+                  $endDate = $activity['endDate'];
+
+                  if ($activityCategory == '1') {
+                    $activityCategory = 'Magang';
+                  } else {
+                    $activityCategory = 'Pelatihan';
+                  }
+            ?>
+
+              <tr>
+                <td style="width: 5%;"><?= $no++ ?>.</td>
+                <td><?= $activityName ?></td>
+                <td><?= $activityCategory ?></td>
+                <td><?= $startDate ?></td>
+                <td><?= $endDate ?></td>
+              </tr>
+              
+            <?php 
+                }
+              }
+            ?>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <h6 class="text-center"><a href="<?php echo site_url('program/pendaftaran') ?>">Klik link berikut, untuk melakukan pendaftaran</a></h6>
+    </div>
+  </div>
 </div>
 <hr>

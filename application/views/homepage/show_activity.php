@@ -9,6 +9,7 @@
           <th>Kategori</th>
           <th>Tgl Mulai</th>
           <th>Tgl Berakhir</th>
+          <th>Keterangan</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
                 'activityCategory' => $activity->kategori,
                 'startDate' => $activity->tgl_mulai,
                 'endDate' => $activity->tgl_berakhir,
+                'note' => $activity->keterangan,
                 'participantQuota' => $activity->kuota,
               );
             }
@@ -48,11 +50,16 @@
               $activityCategory = $activity['activityCategory'];
               $startDate = $activity['startDate'];
               $endDate = $activity['endDate'];
+              $note = $activity['note'];
 
               if ($activityCategory == '1') {
                 $activityCategory = 'Magang';
               } else {
                 $activityCategory = 'Pelatihan';
+              }
+
+              if ($note == '') {
+                $note = '-';
               }
         ?>
 
@@ -62,6 +69,7 @@
             <td><?= $activityCategory ?></td>
             <td><?= $startDate ?></td>
             <td><?= $endDate ?></td>
+            <td><?= $note ?></td>
             <td class="text-center" width="150px">
               <a href="<?= site_url('program/addRegistration/' . $activityId) ?>" class="btn btn-success btn-sm">
                 <b>Daftar</b>
@@ -76,7 +84,7 @@
 
       </tbody>
     </table>
-    </div>
+  </div>
 </div>
 
 <!-- Bootstrap 4.6 -->
