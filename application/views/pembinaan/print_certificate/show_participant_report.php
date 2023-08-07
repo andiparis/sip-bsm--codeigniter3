@@ -105,7 +105,7 @@
                       <td><?= $email ?></td>
                       <td style="width: 10%;"><?= $attendanceParticipantPercentage . '%' ?></td>
                       <td class="text-center" width="150px">
-                        <?php if ($attendanceParticipantPercentage >= 75) { ?>
+                        <?php if ($attendanceParticipantPercentage >= 80) { ?>
                           <a href="<?=site_url('cetak_sertifikat/printCertificate/' . $participantId)?>" target="_blank" class="btn btn-primary btn-sm" style="margin-bottom: 3px;">
                             <b><i class="fas fa-download"></i> Download</b>
                           </a>
