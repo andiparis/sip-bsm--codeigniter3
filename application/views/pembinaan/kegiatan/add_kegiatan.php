@@ -43,8 +43,8 @@
                       <label for="permohonan">Permohonan Workshop</label>
                       <select name="id_permohonan" id="permohonan" class="custom-select">
                         <option value=""> - Pilih - </option>
-                        <?php foreach($data_permohonan as $permohonan) { ?>
-                          <option value="<?=$permohonan->id_permohonan?>"><?=$permohonan->nama_kegiatan?></option>
+                        <?php foreach ($data_permohonan as $permohonan) { ?>
+                          <option value="<?= $permohonan->id_permohonan ?>" data-note="<?= $permohonan->keterangan ?>"><?= $permohonan->nama_kegiatan ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -92,8 +92,8 @@
                       <label for="instruktur1">Instruktur 1 *</label>
                       <select name="id_instruktur_1" id="instruktur1" class="custom-select <?= form_error('id_instruktur_1') ? 'is-invalid' : ''; ?>">
                         <option value=""> - Pilih - </option>
-                        <?php foreach($data_instruktur as $instruktur) { ?>
-                          <option value="<?=$instruktur->id_instruktur?>"><?=$instruktur->nama?></option>
+                        <?php foreach ($data_instruktur as $instruktur) { ?>
+                          <option value="<?= $instruktur->id_instruktur ?>"><?= $instruktur->nama ?></option>
                         <?php } ?>
                       </select>
                       <div class="invalid-feedback"><?= form_error('id_instruktur_1'); ?></div>
@@ -102,8 +102,8 @@
                       <label for="instruktur2">Instruktur 2</label>
                       <select name="id_instruktur_2" id="instruktur2" class="custom-select">
                         <option value=""> - Pilih - </option>
-                        <?php foreach($data_instruktur as $instruktur) { ?>
-                          <option value="<?=$instruktur->id_instruktur?>"><?=$instruktur->nama?></option>
+                        <?php foreach ($data_instruktur as $instruktur) { ?>
+                          <option value="<?= $instruktur->id_instruktur ?>"><?= $instruktur->nama ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -111,8 +111,8 @@
                       <label for="kelas">Kelas</label>
                       <select name="id_kelas" id="kelas" class="custom-select">
                         <option value=""> - Pilih - </option>
-                        <?php foreach($data_kelas as $kelas) { ?>
-                          <option value="<?=$kelas->id_kelas?>"><?=$kelas->nama_kelas?></option>
+                        <?php foreach ($data_kelas as $kelas) { ?>
+                          <option value="<?= $kelas->id_kelas ?>"><?= $kelas->nama_kelas ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -146,3 +146,22 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+document.getElementById('permohonan').addEventListener('change', function() {
+  var selectedOption = this.options[this.selectedIndex];
+  var activityNameInput = document.getElementById('nama');
+  var activityCategorySelect = document.getElementById('kategori');
+  var activityNote = document.getElementById('keterangan');
+  
+  if (selectedOption.value == '') {
+    activityNameInput.value = '';
+    activityCategorySelect.selectedIndex = 0;
+    activityNote = '';
+  } else {
+    activityNameInput.value = selectedOption.text;
+    activityCategorySelect.selectedIndex = 3;
+    activityNote.value = selectedOption.getAttribute('data-note');
+  }
+});
+</script>
