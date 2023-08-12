@@ -45,6 +45,31 @@
                     <?php } ?>
                   </div>
                   <div class="form-group">
+                    <label>Jenis Kegiatan yang Diinginkan</label>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-success" type="checkbox" id="type-1" name="activity_type[]" value="1">
+                          <label for="type-1" class="custom-control-label font-weight-normal">Edukasi pembuatan kerajinan tangan</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-success" type="checkbox" id="type-2" name="activity_type[]" value="2">
+                          <label for="type-2" class="custom-control-label font-weight-normal">Edukasi pemilahan jenis sampah</label>
+                        </div>  
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-success" type="checkbox" id="type-3" name="activity_type[]" value="3">
+                          <label for="type-3" class="custom-control-label font-weight-normal">Edukasi menjaga kebersihan lingkungan</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input custom-control-input-success" type="checkbox" id="type-4" name="activity_type[]" value="4">
+                          <label for="type-4" class="custom-control-label font-weight-normal">Edukasi manajemen bank sampah</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="note">Keterangan</label>
                     <textarea name="note" id="note" rows="3" class="form-control <?= form_error('note') ? 'is-invalid' : ''; ?>"></textarea>
                     <div class="invalid-feedback"><?= form_error('note'); ?></div>

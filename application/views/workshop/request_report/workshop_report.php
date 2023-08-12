@@ -39,6 +39,7 @@
                     <th>Nama Kegiatan</th>
                     <th>Alamat Kegiatan</th>
                     <th>Surat Kegiatan</th>
+                    <th>Jenis Kegiatan</th>
                     <th>Keterangan</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -56,8 +57,13 @@
                       $activityName = $request->nama_kegiatan;
                       $locationWorkshop = $request->alamat_kegiatan;
                       $activityLetter = $request->surat_kegiatan;
+                      $activityType = $request->jenis_kegiatan;
                       $note = $request->keterangan;
                       $status = $request->status_permohonan;
+
+                      if ($activityType == null) {
+                        $activityType = '-';
+                      }
 
                       if ($note == '') {
                         $note = '-';
@@ -87,6 +93,7 @@
                       <td>
                         <a href="<?= base_url('uploads/activity_letter/') . $activityLetter ?>" target="_blank"><?= $activityLetter ?></a>
                       </td>
+                      <td><?= $activityType ?></td>
                       <td><?= $note ?></td>
                       <td class="text-center"><span class="btn btn-sm btn-outline-<?= $style ?> disabled"><?= $requestStatus ?></span></td>
                       <td class="text-center" width="150px">
