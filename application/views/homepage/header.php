@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/adminlte.min.css">
   <style>
     @media (max-width: 768px) {
       #intro-example {
