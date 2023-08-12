@@ -48,8 +48,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' ? 'menu-open' : null?>">
-            <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' ? 'active' : null?>">
+          <li class="nav-item <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' || $this->uri->segment(1) == 'laporan_peserta' ? 'menu-open' : null?>">
+            <a href="#" class="nav-link <?=$this->uri->segment(1) == 'kegiatan' || $this->uri->segment(1) == 'laporan_presensi' || $this->uri->segment(1) == 'cetak_sertifikat' || $this->uri->segment(1) == 'laporan_peserta' ? 'active' : null?>">
               <i class="nav-icon fas fa-chalkboard"></i>
               <p>
                 Kegiatan Pembinaan
@@ -78,6 +78,14 @@
                   <i class="nav-icon far fa-circle"></i>
                   <p>
                     Cetak Sertifikat
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=site_url('laporan_peserta')?>" class="nav-link <?=$this->uri->segment(1) == 'laporan_peserta' ? 'active' : null?>">
+                  <i class="nav-icon far fa-circle"></i>
+                  <p>
+                    Laporan Peserta
                   </p>
                 </a>
               </li>
